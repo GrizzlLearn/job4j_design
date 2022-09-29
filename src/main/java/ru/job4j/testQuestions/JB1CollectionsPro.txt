@@ -29,7 +29,7 @@ List<? extends Number> может содержать объекты, класс 
 ---
 Что такое unbounded wild cards?
 
-<?>
+List<? super Number> может содержать объекты, класс которых является Number выше по иерархии.
 
 ---
 ---
