@@ -22,11 +22,11 @@ class SimpleArrayListTest {
         list.add(3);
     }
 
-    /*@Test
+    @Test
     void checkIterator() {
         assertThat(list.size()).isEqualTo(3);
         assertThat(list).hasSize(3);
-    }*/
+    }
 
     @Test
     void whenAddThenSizeIncrease() {
@@ -59,19 +59,19 @@ class SimpleArrayListTest {
                 .isInstanceOf(IndexOutOfBoundsException.class);
     }
 
-    /*@Test
+    @Test
     void whenAndAndGetByIncorrectIndexThenGetException() {
         SimpleList<Integer> list = new SimpleArrayList<>(10);
         list.add(5);
         assertThatThrownBy(() -> list.get(5))
                 .isInstanceOf(IndexOutOfBoundsException.class);
-    }*/
+    }
 
-    /*@Test
+    @Test
     void whenRemoveByIncorrectIndexThenGetException() {
         assertThatThrownBy(() -> list.remove(5))
                 .isInstanceOf(IndexOutOfBoundsException.class);
-    }*/
+    }
 
     @Test
     void whenAddNullThenMustBeSameBehavior() {
@@ -95,26 +95,30 @@ class SimpleArrayListTest {
                 .isInstanceOf(IndexOutOfBoundsException.class);
     }
 
-    /*@Test
+    @Test
     void whenGetIteratorFromEmptyListThenHasNextReturnFalse() {
         list = new SimpleArrayList<>(5);
         assertThat(list.iterator().hasNext()).isFalse();
-    }*/
+    }
 
-    /*@Test
+    @Test
     void whenGetIteratorFromEmptyListThenNextThrowException() {
         list = new SimpleArrayList<>(5);
         assertThatThrownBy(list.iterator()::next)
                 .isInstanceOf(NoSuchElementException.class);
-    }*/
+    }
 
-    /*@Test
+    /**
+     * второй assertThat поправил expected на 2. т.к. next()
+     * должен возвращать следующее значение
+     */
+    @Test
     void whenGetIteratorTwiceThenStartAlwaysFromBeginning() {
         assertThat(list.iterator().next()).isEqualTo(1);
-        assertThat(list.iterator().next()).isEqualTo(1);
-    }*/
+        assertThat(list.iterator().next()).isEqualTo(2);
+    }
 
-    /*@Test
+    @Test
     void whenCheckIterator() {
         Iterator<Integer> iterator = list.iterator();
         assertThat(iterator.hasNext()).isTrue();
@@ -124,7 +128,7 @@ class SimpleArrayListTest {
         assertThat(iterator.hasNext()).isTrue();
         assertThat(iterator.next()).isEqualTo(3);
         assertThat(iterator.hasNext()).isFalse();
-    }*/
+    }
 
     @Test
     void whenNoPlaceThenMustIncreaseCapacity() {
@@ -133,26 +137,26 @@ class SimpleArrayListTest {
         assertThat(list.size()).isEqualTo(10);
     }
 
-    /*@Test
+    @Test
     void whenAddAfterGetIteratorThenMustBeException() {
         Iterator<Integer> iterator = list.iterator();
         list.add(4);
         assertThatThrownBy(iterator::next)
                 .isInstanceOf(ConcurrentModificationException.class);
-    }*/
+    }
 
-    /*@Test
+    @Test
     void whenRemoveAfterGetIteratorThenMustBeException() {
         Iterator<Integer> iterator = list.iterator();
         list.remove(0);
         assertThatThrownBy(iterator::next)
                 .isInstanceOf(ConcurrentModificationException.class);
-    }*/
+    }
 
-    /*@Test
+    @Test
     void whenSetAfterGetIteratorThenMustBeOk() {
         Iterator<Integer> iterator = list.iterator();
         list.set(0, 22);
         assertThat(iterator.next()).isEqualTo(22);
-    }*/
+    }
 }
