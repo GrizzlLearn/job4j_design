@@ -23,33 +23,26 @@ public class SimpleArrayList<T> implements SimpleList<T> {
         if (container.length == size) {
             container = increase();
         }
-        container[size] = value;
-        size++;
+        container[size++] = value;
         modCount++;
     }
 
     @Override
     public T set(int index, T newValue) {
+        Objects.checkIndex(index, size);
         T result = container[index];
-        if (container.length == size) {
-            container = increase();
-        }
-        System.arraycopy(container, index, container, index + 1, size - index);
         container[index] = newValue;
         return result;
     }
 
     @Override
     public T remove(int index) {
-        if (checkIndex(index)) {
-            throw new IndexOutOfBoundsException();
-        }
+        Objects.checkIndex(index, size);
         T result = container[index];
-        int newSize = size - 1;
-        if (newSize > index) {
-            System.arraycopy(container, index + 1, container, index, newSize - index);
+        if (size - 1 > index) {
+            System.arraycopy(container, index + 1, container, index, size - 1 - index);
         }
-        container[newSize] = null;
+        container[size - 1] = null;
         size--;
         modCount++;
         return result;
@@ -57,9 +50,7 @@ public class SimpleArrayList<T> implements SimpleList<T> {
 
     @Override
     public T get(int index) {
-        if (checkIndex(index)) {
-            throw new IndexOutOfBoundsException();
-        }
+        Objects.checkIndex(index, size);
         return container[index];
     }
 
@@ -68,12 +59,14 @@ public class SimpleArrayList<T> implements SimpleList<T> {
         return size;
     }
 
-    private boolean checkIndex(int index) {
-        return index < 0 || index >= size;
-    }
-
     private T[] increase() {
-        T[] newContainer = (T[]) new Object[container.length * 2];
+        T[] newContainer;
+        if (container.length != 0) {
+            newContainer = (T[]) new Object[container.length * 2];
+        } else {
+            newContainer = (T[]) new Object[1];
+        }
+
         System.arraycopy(container, 0, newContainer, 0, size);
         return newContainer;
     }
