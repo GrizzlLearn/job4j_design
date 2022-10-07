@@ -10,10 +10,6 @@ public class SimpleArrayList<T> implements SimpleList<T> {
 
     private int modCount;
 
-    private int point = 0;
-
-    private int expectedModCount;
-
     public SimpleArrayList(int capacity) {
         this.container = (T[]) new Object[capacity];
     }
@@ -67,14 +63,15 @@ public class SimpleArrayList<T> implements SimpleList<T> {
 
     @Override
     public Iterator<T> iterator() {
-        expectedModCount = modCount;
+        final int expectedModCount = modCount;
+        final int[] point = {0};
         return new Iterator<T>() {
             @Override
             public boolean hasNext() {
                 if (expectedModCount != modCount) {
                     throw new ConcurrentModificationException();
                 }
-                return point != size;
+                return point[0] != size;
             }
 
             @Override
@@ -82,7 +79,7 @@ public class SimpleArrayList<T> implements SimpleList<T> {
                 if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
-                return container[point++];
+                return container[point[0]++];
             }
         };
     }

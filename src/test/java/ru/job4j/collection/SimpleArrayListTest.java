@@ -108,14 +108,10 @@ class SimpleArrayListTest {
                 .isInstanceOf(NoSuchElementException.class);
     }
 
-    /**
-     * второй assertThat поправил expected на 2. т.к. next()
-     * должен возвращать следующее значение
-     */
     @Test
     void whenGetIteratorTwiceThenStartAlwaysFromBeginning() {
         assertThat(list.iterator().next()).isEqualTo(1);
-        assertThat(list.iterator().next()).isEqualTo(2);
+        assertThat(list.iterator().next()).isEqualTo(1);
     }
 
     @Test
