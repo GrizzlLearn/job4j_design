@@ -21,7 +21,8 @@ public class SimpleArrayList<T> implements SimpleList<T> {
     @Override
     public void add(T value) {
         if (container.length == size) {
-            container = increase();
+            //container = increase();
+            increase();
         }
         container[size++] = value;
         modCount++;
@@ -37,13 +38,12 @@ public class SimpleArrayList<T> implements SimpleList<T> {
 
     @Override
     public T remove(int index) {
-        Objects.checkIndex(index, size);
-        T result = container[index];
-        if (size - 1 > index) {
-            System.arraycopy(container, index + 1, container, index, size - 1 - index);
-        }
-        container[size - 1] = null;
+        T result = get(index);
         size--;
+        if (size > index) {
+            System.arraycopy(container, index + 1, container, index, size - index);
+        }
+        container[size] = null;
         modCount++;
         return result;
     }
@@ -59,16 +59,11 @@ public class SimpleArrayList<T> implements SimpleList<T> {
         return size;
     }
 
-    private T[] increase() {
-        T[] newContainer;
-        if (container.length != 0) {
-            newContainer = (T[]) new Object[container.length * 2];
-        } else {
-            newContainer = (T[]) new Object[1];
-        }
-
-        System.arraycopy(container, 0, newContainer, 0, size);
-        return newContainer;
+    private void increase() {
+        T[] newContainer = (T[]) new Object[container.length != 0
+                ? container.length * 2
+                : 1];
+        container = newContainer;
     }
 
     @Override
@@ -77,6 +72,9 @@ public class SimpleArrayList<T> implements SimpleList<T> {
         return new Iterator<T>() {
             @Override
             public boolean hasNext() {
+                if (expectedModCount != modCount) {
+                    throw new ConcurrentModificationException();
+                }
                 return point != size;
             }
 
@@ -84,9 +82,6 @@ public class SimpleArrayList<T> implements SimpleList<T> {
             public T next() {
                 if (!hasNext()) {
                     throw new NoSuchElementException();
-                }
-                if (expectedModCount != modCount) {
-                    throw new ConcurrentModificationException();
                 }
                 return container[point++];
             }
