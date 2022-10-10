@@ -63,15 +63,15 @@ public class SimpleArrayList<T> implements SimpleList<T> {
 
     @Override
     public Iterator<T> iterator() {
-        final int expectedModCount = modCount;
-        final int[] point = {0};
         return new Iterator<T>() {
+            final int expectedModCount = modCount;
+            private int point = 0;
             @Override
             public boolean hasNext() {
                 if (expectedModCount != modCount) {
                     throw new ConcurrentModificationException();
                 }
-                return point[0] != size;
+                return point != size;
             }
 
             @Override
@@ -79,7 +79,7 @@ public class SimpleArrayList<T> implements SimpleList<T> {
                 if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
-                return container[point[0]++];
+                return container[point++];
             }
         };
     }
