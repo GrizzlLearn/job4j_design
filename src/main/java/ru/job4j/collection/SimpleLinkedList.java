@@ -14,19 +14,17 @@ public class SimpleLinkedList<E> implements LinkedList<E> {
 
     public SimpleLinkedList() {
 
-        lastNode = new Node<E>(null, firstNode, null);
-        firstNode = new Node<E>(null, null, lastNode);
+        lastNode = new Node<E>(null, null);
+        firstNode = new Node<E>(null, lastNode);
     }
 
     private static class Node<E> {
 
         private E currentElement;
-        private final Node<E> prevElement;
         private Node<E> nextElement;
 
-        private Node(E currentElement, Node<E> prevElement, Node<E> nextElement) {
+        private Node(E currentElement, Node<E> nextElement) {
             this.currentElement = currentElement;
-            this.prevElement = prevElement;
             this.nextElement = nextElement;
         }
 
@@ -36,10 +34,6 @@ public class SimpleLinkedList<E> implements LinkedList<E> {
 
         public void setCurrentElement(E currentElement) {
             this.currentElement = currentElement;
-        }
-
-        public Node<E> getPrevElement() {
-            return prevElement;
         }
 
         public Node<E> getNextElement() {
@@ -56,7 +50,7 @@ public class SimpleLinkedList<E> implements LinkedList<E> {
 
         Node<E> newNode = lastNode;
         newNode.setCurrentElement(value);
-        lastNode = new Node<E>(null, newNode, null);
+        lastNode = new Node<E>(null, null);
         newNode.setNextElement(lastNode);
         size++;
         modCount++;
@@ -69,19 +63,12 @@ public class SimpleLinkedList<E> implements LinkedList<E> {
 
         Node<E> target = firstNode.getNextElement();
 
-        E result;
-
-        if (index == 0) {
-            result = target.getCurrentElement();
-        } else if (index == size) {
-            result = lastNode.getPrevElement().getCurrentElement();
-        } else {
+        if (index != 0) {
             for (int i = 0; i < index; i++) {
                 target = target.getNextElement();
             }
-            result = target.getCurrentElement();
         }
-        return result;
+        return target.getCurrentElement();
     }
 
     @Override
