@@ -10,10 +10,6 @@ public class SimpleStack<T> extends ForwardLinked<T> {
     }
 
     public void push(T value) {
-        if (!linked.iterator().hasNext()) {
-            linked.add(value);
-        } else {
-            linked.addFirst(value);
-        }
+        linked.addFirst(value);
     }
 }
