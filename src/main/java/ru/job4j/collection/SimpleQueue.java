@@ -5,9 +5,15 @@ public class SimpleQueue<T> {
     private final SimpleStack<T> out = new SimpleStack<>();
 
     public T poll() {
-        return null;
+        if (!out.iterator().hasNext()) {
+            while (in.iterator().hasNext()) {
+                out.push(in.pop());
+            }
+        }
+        return out.pop();
     }
 
     public void push(T value) {
+        in.push(value);
     }
 }
