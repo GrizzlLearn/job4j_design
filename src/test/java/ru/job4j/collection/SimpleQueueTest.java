@@ -16,7 +16,7 @@ class SimpleQueueTest {
         queue.push(1);
     }
 
-    /*@Test
+    @Test
     void whenPushPoll() {
         assertThat(queue.poll()).isEqualTo(1);
     }
@@ -32,7 +32,7 @@ class SimpleQueueTest {
         queue.poll();
         queue.push(2);
         assertThat(queue.poll()).isEqualTo(2);
-    }*/
+    }
 
     @Test
     void whenEmptyPoll() {
@@ -41,7 +41,7 @@ class SimpleQueueTest {
                 .isInstanceOf(NoSuchElementException.class);
     }
 
-    /*@Test
+    @Test
     void when2PushPollPushPollEmpty() {
         queue.poll();
         queue.push(2);
@@ -56,5 +56,5 @@ class SimpleQueueTest {
         queue.poll();
         queue.push(3);
         assertThat(queue.poll()).isEqualTo(2);
-    }*/
+    }
 }
