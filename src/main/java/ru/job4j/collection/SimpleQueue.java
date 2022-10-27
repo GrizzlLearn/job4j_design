@@ -10,15 +10,14 @@ public class SimpleQueue<T> {
     int countOut;
 
     public T poll() {
-        if (countOut == 0 && countIn > 0) {
+        if (countOut == 0 && countIn == 0) {
+            throw new NoSuchElementException();
+        } else if (countOut == 0 && countIn > 0) {
             while (countIn > 0) {
                 out.push(in.pop());
                 countOut++;
                 countIn--;
             }
-        }
-        if (countOut == 0 && countIn == 0) {
-            throw new NoSuchElementException();
         }
         countOut--;
         return out.pop();
