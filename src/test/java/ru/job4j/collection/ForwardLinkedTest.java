@@ -43,4 +43,29 @@ class ForwardLinkedTest {
         Iterator<Integer> it = linked.iterator();
         assertThat(it.next()).isEqualTo(2);
     }
+
+    @Test
+    void whenSize0ThenReturnFalse() {
+        ForwardLinked<Integer> linked = new ForwardLinked<>();
+        assertThat(linked.revert()).isFalse();
+    }
+
+    @Test
+    void whenSize1ThenReturnFalse() {
+        ForwardLinked<Integer> linked = new ForwardLinked<>();
+        linked.add(1);
+        assertThat(linked.revert()).isFalse();
+    }
+
+    @Test
+    void whenAddAndRevertTrue() {
+        ForwardLinked<Integer> linked = new ForwardLinked<>();
+        linked.add(1);
+        linked.add(2);
+        linked.add(3);
+        linked.add(4);
+        assertThat(linked).containsSequence(1, 2, 3, 4);
+        assertThat(linked.revert()).isTrue();
+        assertThat(linked).containsSequence(4, 3, 2, 1);
+    }
 }
