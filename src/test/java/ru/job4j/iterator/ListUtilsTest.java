@@ -74,4 +74,12 @@ class ListUtilsTest {
         ListUtils.removeAll(list, elements);
         assertThat(list).hasSize(5).containsSequence(1, 2, 3, 9, 10);
     }
+
+    @Test
+    void whenRemoveAllRandomElements() {
+        List<Integer> list = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
+        List<Integer> elements = new ArrayList<>(Arrays.asList(7, 2, 1, 10, 9));
+        ListUtils.removeAll(list, elements);
+        assertThat(list).hasSize(5).containsSequence(3, 4, 5, 6, 8);
+    }
 }
