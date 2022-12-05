@@ -22,7 +22,7 @@ class SimpleSetTest {
         assertThat(set.add(null)).isFalse();
     }
 
-    /*@Test
+    @Test
     void whenAddMultipleObjects() {
         Set<Integer> set = new SimpleSet<>();
         assertThat(set.add(1)).isTrue();
@@ -30,7 +30,9 @@ class SimpleSetTest {
         assertThat(set.add(2)).isTrue();
         assertThat(set.contains(2)).isTrue();
         assertThat(set.add(3)).isTrue();
+        assertThat(set.contains(3)).isTrue();
         assertThat(set.add(4)).isTrue();
+        assertThat(set.contains(4)).isTrue();
         assertThat(set.add(1)).isFalse();
-    }*/
+    }
 }
