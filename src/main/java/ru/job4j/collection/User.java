@@ -29,21 +29,26 @@ public class User {
         int hash2 = hashcode2 ^ (hashcode1 >>> 16);
         int bucket2 = hash2 & 15;
 
-        System.out.printf("user1 = хэшкод: %s, хэш: %s, backet: %s", hashcode1, hash1, bucket1);
+        System.out.printf("user1 = хэшкод: %s, хэш: %s, bucket: %s", hashcode1, hash1, bucket1);
         System.out.println(System.lineSeparator());
-        System.out.printf("user2 = хэшкод: %s, хэш: %s, backet: %s", hashcode2, hash2, bucket2);
+        System.out.printf("user2 = хэшкод: %s, хэш: %s, bucket: %s", hashcode2, hash2, bucket2);
         System.out.println(System.lineSeparator());
         System.out.println(map.get(user1));
         System.out.println(map.get(user2));
+        System.out.println(map);
     }
 
-    /*@Override
+    @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         User user = (User) o;
         return children == user.children && Objects.equals(name, user.name) && Objects.equals(birthday, user.birthday);
-    }*/
+    }
 
     @Override
     public int hashCode() {
