@@ -54,9 +54,10 @@ public class SimpleArrayList<T> implements SimpleList<T> {
     }
 
     private void increase() {
-        T[] newContainer = (T[]) new Object[container.length != 0
-                ? container.length * 2
-                : 1];
+        T[] newContainer = Arrays.copyOf(container,
+                (container.length == 0)
+                ? 1
+                : container.length * 2);
         container = newContainer;
     }
 
