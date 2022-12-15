@@ -20,15 +20,20 @@ public class SimpleMap<K, V> implements Map<K, V> {
     }
 
     private int hash(int hashCode) {
-        return 0;
+        return hashCode % capacity;
     }
 
     private int indexFor(int hash) {
-        return 0;
+        return hash & (capacity * 2);
     }
 
     private void expand() {
-
+        MapEntry<K, V>[] newTable = new MapEntry[capacity * 2];
+        if ((float) capacity / count >= LOAD_FACTOR) {
+           for (int i = 0; i < table.length; i++) {
+               newTable.put(table[i].key, table[i].value);
+           }
+        }
     }
 
     @Override
