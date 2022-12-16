@@ -1,6 +1,7 @@
 package ru.job4j.map;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 import java.util.Objects;
 
 public class SimpleMap<K, V> implements Map<K, V> {
@@ -91,7 +92,22 @@ public class SimpleMap<K, V> implements Map<K, V> {
 
     @Override
     public Iterator<K> iterator() {
-        return null;
+        return new Iterator<K>() {
+            int index = 0;
+            @Override
+            public boolean hasNext() {
+                return table[index++] != null;
+            }
+
+            @Override
+            public K next() {
+                if (!hasNext()) {
+                    throw new NoSuchElementException();
+                }
+                return table[index].key;
+            }
+
+        };
     }
 
     private static class MapEntry<K, V> {
