@@ -24,7 +24,7 @@ public class SimpleMap<K, V> implements Map<K, V> {
         }
         MapEntry<K, V> tmp = new MapEntry<>(key, value);
         int index = keyIndex(key);
-        if (table[index].value != null) {
+        if (table[index] != null) {
             result = false;
         } else {
             table[index] = tmp;
@@ -96,7 +96,7 @@ public class SimpleMap<K, V> implements Map<K, V> {
             int index = 0;
             @Override
             public boolean hasNext() {
-                return table[index++] != null;
+                return table[index] != null;
             }
 
             @Override
@@ -104,7 +104,7 @@ public class SimpleMap<K, V> implements Map<K, V> {
                 if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
-                return table[index].key;
+                return table[index++].key;
             }
 
         };
