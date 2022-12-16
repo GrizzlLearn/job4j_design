@@ -1,7 +1,5 @@
 package ru.job4j.map;
 
-import org.w3c.dom.Node;
-
 import java.util.Iterator;
 import java.util.Objects;
 
@@ -21,7 +19,7 @@ public class SimpleMap<K, V> implements Map<K, V> {
     public boolean put(K key, V value) {
         boolean result = false;
         MapEntry<K, V> tmp = new MapEntry<>(key, value);
-        int index = indexFor(hash(key.hashCode()));
+        int index = keyIndex(key);
         if (table[index].value != null) {
             result = false;
         } else {
@@ -44,20 +42,38 @@ public class SimpleMap<K, V> implements Map<K, V> {
     private void expand() {
     }
 
+    private int keyIndex(K key) {
+        return indexFor(hash(key.hashCode()));
+    }
+
+    private boolean checkEquals(K key) {
+        boolean result = false;
+        int index = keyIndex(key);
+        if (table[index].key.hashCode() == key.hashCode() && table[index].key.equals(key)) {
+            result = true;
+        }
+        return result;
+    }
+
     @Override
     public V get(K key) {
         V result = null;
-        for (MapEntry<K, V> entry : table) {
-            if (entry.key.equals(key)) {
-                result = entry.value;
-            }
+        int index = keyIndex(key);
+        if (checkEquals(key)) {
+            result = table[index].value;
         }
         return result;
     }
 
     @Override
     public boolean remove(K key) {
-        return false;
+        boolean result = false;
+        if (checkEquals(key)) {
+            table[keyIndex(key)] = null;
+            modCount++;
+            count--;
+        }
+        return result;
     }
 
     @Override
