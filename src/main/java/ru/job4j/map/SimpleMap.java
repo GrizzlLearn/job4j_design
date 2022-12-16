@@ -18,6 +18,9 @@ public class SimpleMap<K, V> implements Map<K, V> {
     @Override
     public boolean put(K key, V value) {
         boolean result = false;
+        if (count >= capacity * LOAD_FACTOR) {
+            expand();
+        }
         MapEntry<K, V> tmp = new MapEntry<>(key, value);
         int index = keyIndex(key);
         if (table[index].value != null) {
@@ -40,6 +43,10 @@ public class SimpleMap<K, V> implements Map<K, V> {
     }
 
     private void expand() {
+        MapEntry<K, V>[] qwer = new MapEntry[capacity * 2];
+        for (MapEntry<K, V> entry : table) {
+            qwer[keyIndex(entry.key)] = entry;
+        }
     }
 
     private int keyIndex(K key) {
