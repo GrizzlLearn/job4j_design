@@ -43,10 +43,16 @@ public class SimpleMap<K, V> implements Map<K, V> {
     }
 
     private void expand() {
-        MapEntry<K, V>[] qwer = new MapEntry[capacity * 2];
+        MapEntry<K, V>[] tmpTable = new MapEntry[capacity * 2];
+        capacity *= 2;
+        count = 0;
+        modCount = 0;
         for (MapEntry<K, V> entry : table) {
-            qwer[keyIndex(entry.key)] = entry;
+            tmpTable[keyIndex(entry.key)] = entry;
+            count++;
+            modCount++;
         }
+        table = tmpTable;
     }
 
     private int keyIndex(K key) {
