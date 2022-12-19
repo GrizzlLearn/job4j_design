@@ -35,19 +35,25 @@ public class SimpleMap<K, V> implements Map<K, V> {
         return result;
     }
 
-    private int hash(int hashCode) {
-        return hashCode % capacity;
+    private int hash(K key) {
+        int result;
+        if (key == null) {
+            result = 0;
+        } else {
+            result = (key.hashCode()) ^ (key.hashCode() >>> capacity);
+        }
+        return result;
     }
 
     private int indexFor(int hash) {
-        return hash & (capacity * 2);
+        return hash & (capacity - 1);
     }
 
     private void expand() {
-        MapEntry<K, V>[] tmpTable = new MapEntry[capacity * 2];
         capacity *= 2;
         count = 0;
         modCount = 0;
+        MapEntry<K, V>[] tmpTable = new MapEntry[capacity];
         for (MapEntry<K, V> entry : table) {
             tmpTable[keyIndex(entry.key)] = entry;
             count++;
@@ -57,7 +63,13 @@ public class SimpleMap<K, V> implements Map<K, V> {
     }
 
     private int keyIndex(K key) {
-        return indexFor(hash(key.hashCode()));
+        int result;
+        if (key == null) {
+            result = 0;
+        } else {
+            result = indexFor(hash(key));
+        }
+        return result;
     }
 
     private boolean checkEquals(K key) {
