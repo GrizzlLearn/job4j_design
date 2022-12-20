@@ -75,7 +75,12 @@ public class SimpleMap<K, V> implements Map<K, V> {
     private boolean checkEquals(K key) {
         boolean result = false;
         int index = keyIndex(key);
-        if (table[index].key.hashCode() == key.hashCode() && table[index].key.equals(key)) {
+        if (table[index] == null) {
+            result = false;
+        } else if (table[index].key == null && key == null) {
+            result = true;
+        } else if (table[index].key.hashCode() == key.hashCode()
+                && table[index].key.equals(key)) {
             result = true;
         }
         return result;
@@ -85,7 +90,7 @@ public class SimpleMap<K, V> implements Map<K, V> {
     public V get(K key) {
         V result = null;
         int index = keyIndex(key);
-        if (checkEquals(key) && table[index] != null) {
+        if (checkEquals(key)) {
             result = table[index].value;
         }
         return result;
@@ -94,11 +99,12 @@ public class SimpleMap<K, V> implements Map<K, V> {
     @Override
     public boolean remove(K key) {
         boolean result = false;
-        int index = keyIndex(key);
-        if (checkEquals(key) && table[index] != null) {
+        if (checkEquals(key)) {
+            int index = keyIndex(key);
             table[index] = null;
             modCount++;
             count--;
+            result = true;
         }
         return result;
     }
