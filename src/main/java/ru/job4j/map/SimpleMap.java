@@ -22,6 +22,7 @@ public class SimpleMap<K, V> implements Map<K, V> {
         if (count >= capacity * LOAD_FACTOR) {
             expand();
         }
+
         MapEntry<K, V> tmp = new MapEntry<>(key, value);
         int index = keyIndex(key);
         if (table[index] != null) {
@@ -32,17 +33,12 @@ public class SimpleMap<K, V> implements Map<K, V> {
             modCount++;
             result = true;
         }
+
         return result;
     }
 
     private int hash(K key) {
-        int result;
-        if (key == null) {
-            result = 0;
-        } else {
-            result = (key.hashCode()) ^ (key.hashCode() >>> capacity);
-        }
-        return result;
+        return key == null ? 0 : (key.hashCode()) ^ (key.hashCode() >>> capacity);
     }
 
     private int indexFor(int hash) {
@@ -63,13 +59,7 @@ public class SimpleMap<K, V> implements Map<K, V> {
     }
 
     private int keyIndex(K key) {
-        int result;
-        if (key == null) {
-            result = 0;
-        } else {
-            result = indexFor(hash(key));
-        }
-        return result;
+        return key == null ? 0 : indexFor(hash(key));
     }
 
     private boolean checkEquals(K key) {
@@ -88,20 +78,14 @@ public class SimpleMap<K, V> implements Map<K, V> {
 
     @Override
     public V get(K key) {
-        V result = null;
-        int index = keyIndex(key);
-        if (checkEquals(key)) {
-            result = table[index].value;
-        }
-        return result;
+        return checkEquals(key) ? table[keyIndex(key)].value : null;
     }
 
     @Override
     public boolean remove(K key) {
         boolean result = false;
         if (checkEquals(key)) {
-            int index = keyIndex(key);
-            table[index] = null;
+            table[keyIndex(key)] = null;
             modCount++;
             count--;
             result = true;
@@ -129,7 +113,6 @@ public class SimpleMap<K, V> implements Map<K, V> {
                 }
                 return table[index] == null ? null : table[index++].key;
             }
-
         };
     }
 
