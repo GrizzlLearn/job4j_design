@@ -17,7 +17,7 @@ class SimpleMapTest {
         map.put(4, "4");
     }
 
-    /*@Test
+    @Test
     void checkSimpleIterator() {
         assertThat(map).hasSize(4).contains(1, 2, 3, 4);
     }
@@ -148,5 +148,5 @@ class SimpleMapTest {
         SimpleMap<Integer, String> map = new SimpleMap<>();
         assertThat(map.put(0, "0")).isTrue();
         assertThat(map.get(null)).isNull();
-    }*/
+    }
 }

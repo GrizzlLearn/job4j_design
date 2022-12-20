@@ -85,7 +85,7 @@ public class SimpleMap<K, V> implements Map<K, V> {
     public V get(K key) {
         V result = null;
         int index = keyIndex(key);
-        if (checkEquals(key)) {
+        if (checkEquals(key) && table[index] != null) {
             result = table[index].value;
         }
         return result;
@@ -94,8 +94,9 @@ public class SimpleMap<K, V> implements Map<K, V> {
     @Override
     public boolean remove(K key) {
         boolean result = false;
-        if (checkEquals(key)) {
-            table[keyIndex(key)] = null;
+        int index = keyIndex(key);
+        if (checkEquals(key) && table[index] != null) {
+            table[index] = null;
             modCount++;
             count--;
         }
@@ -105,10 +106,14 @@ public class SimpleMap<K, V> implements Map<K, V> {
     @Override
     public Iterator<K> iterator() {
         return new Iterator<K>() {
-            int index = 0;
+            int index;
+
             @Override
             public boolean hasNext() {
-                return table[index] != null;
+                while (index < capacity && table[index] == null) {
+                    index++;
+                }
+                return index < capacity;
             }
 
             @Override
@@ -116,7 +121,7 @@ public class SimpleMap<K, V> implements Map<K, V> {
                 if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
-                return table[index++].key;
+                return table[index] == null ? null : table[index++].key;
             }
 
         };
