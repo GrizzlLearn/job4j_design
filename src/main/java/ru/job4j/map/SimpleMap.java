@@ -52,9 +52,13 @@ public class SimpleMap<K, V> implements Map<K, V> {
         modCount = 0;
         MapEntry<K, V>[] tmpTable = new MapEntry[capacity];
         for (MapEntry<K, V> entry : table) {
-            tmpTable[keyIndex(entry.key)] = entry;
-            count++;
-            modCount++;
+            if (entry == null) {
+              tmpTable[0] = null;
+            } else {
+                tmpTable[keyIndex(entry.key)] = entry;
+                count++;
+                modCount++;
+            }
         }
         table = tmpTable;
     }
