@@ -72,12 +72,18 @@ public class SimpleMap<K, V> implements Map<K, V> {
         int index = keyIndex(key);
         if (table[index] == null) {
             result = false;
-        } else if (table[index].key == null && key == null) {
+        } else if (key == null && table[index] == null) {
+            result = false;
+        } else if (key == null && table[index].key == null) {
             result = true;
-        } else if (table[index].key.hashCode() == key.hashCode()
+        } else if (key != null && table[index].key == null) {
+            result = false;
+        } else if (key != null
+                && table[index].key.hashCode() == key.hashCode()
                 && table[index].key.equals(key)) {
             result = true;
         }
+
         return result;
     }
 
