@@ -38,7 +38,7 @@ public class SimpleMap<K, V> implements Map<K, V> {
     }
 
     private int hash(int hashCode) {
-        return hashCode == 0 ? 0 : (hashCode) ^ (hashCode >>> capacity);
+        return (hashCode) ^ (hashCode >>> 16);
     }
 
     private int indexFor(int hash) {
@@ -47,7 +47,6 @@ public class SimpleMap<K, V> implements Map<K, V> {
 
     private void expand() {
         capacity *= 2;
-        modCount = 0;
         MapEntry<K, V>[] tmpTable = new MapEntry[capacity];
 
         for (MapEntry<K, V> entry : table) {
@@ -64,16 +63,15 @@ public class SimpleMap<K, V> implements Map<K, V> {
         return key == null ? 0 : indexFor(hash(key.hashCode()));
     }
 
-    private boolean checkEquals(K key) {
+    private boolean checkEquals(K key, int index) {
         boolean result;
-        int index = keyIndex(key);
 
-        if (table[index] == null || table[index].key == null) {
-            result = key == null;
+        if (Objects.equals(table[index], null) || Objects.equals(table[index].key, null)) {
+            result = Objects.equals(key, null);
         } else {
-            result = key != null
-                    && table[index].key.hashCode() == key.hashCode()
-                    && table[index].key.equals(key);
+            result = !Objects.equals(key, null)
+                    && Objects.equals(table[index].key.hashCode(), key.hashCode())
+                    && Objects.equals(table[index].key, key);
         }
 
         return result;
@@ -81,15 +79,18 @@ public class SimpleMap<K, V> implements Map<K, V> {
 
     @Override
     public V get(K key) {
-        return checkEquals(key) ? table[keyIndex(key)].value : null;
+        int index = keyIndex(key);
+
+        return checkEquals(key, index) ? table[index].value : null;
     }
 
     @Override
     public boolean remove(K key) {
         boolean result = false;
+        int index = keyIndex(key);
 
-        if (checkEquals(key)) {
-            table[keyIndex(key)] = null;
+        if (checkEquals(key, index)) {
+            table[index] = null;
             modCount++;
             count--;
             result = true;
