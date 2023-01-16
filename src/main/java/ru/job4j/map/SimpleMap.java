@@ -60,18 +60,16 @@ public class SimpleMap<K, V> implements Map<K, V> {
     }
 
     private int keyIndex(K key) {
-        return key == null ? 0 : indexFor(hash(key.hashCode()));
+        return key == null ? 0 : indexFor(hash(Objects.hashCode(key)));
     }
 
     private boolean checkEquals(K key, int index) {
-        boolean result;
+        boolean result = false;
 
-        if (Objects.equals(table[index], null) || Objects.equals(table[index].key, null)) {
-            result = Objects.equals(key, null);
-        } else {
-            result = !Objects.equals(key, null)
-                    && Objects.equals(table[index].key.hashCode(), key.hashCode())
-                    && Objects.equals(table[index].key, key);
+        if (!Objects.equals(table[index], null)) {
+            if (Objects.hashCode(key) == Objects.hashCode(table[index].key)) {
+                result = Objects.equals(table[index].key, key);
+            }
         }
 
         return result;
@@ -130,39 +128,12 @@ public class SimpleMap<K, V> implements Map<K, V> {
     }
 
     private static class MapEntry<K, V> {
-
         K key;
         V value;
 
         public MapEntry(K key, V value) {
             this.key = key;
             this.value = value;
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) {
-                return true;
-            }
-            if (o == null || getClass() != o.getClass()) {
-                return false;
-            }
-
-            MapEntry<?, ?> entry = (MapEntry<?, ?>) o;
-
-            if (!Objects.equals(key, entry.key)) {
-                return false;
-            }
-
-            return Objects.equals(value, entry.value);
-        }
-
-        @Override
-        public int hashCode() {
-            int result = key != null ? key.hashCode() : 0;
-            result = 31 * result + (value != null ? value.hashCode() : 0);
-
-            return result;
         }
     }
 }
