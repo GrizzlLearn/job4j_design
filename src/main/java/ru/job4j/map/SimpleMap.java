@@ -66,7 +66,7 @@ public class SimpleMap<K, V> implements Map<K, V> {
     private boolean checkEquals(K key, int index) {
         boolean result = false;
 
-        if (!Objects.equals(table[index], null)) {
+        if (!Objects.isNull(table[index])) {
             if (Objects.hashCode(key) == Objects.hashCode(table[index].key)) {
                 result = Objects.equals(table[index].key, key);
             }
