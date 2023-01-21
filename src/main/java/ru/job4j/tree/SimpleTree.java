@@ -14,6 +14,7 @@ public class SimpleTree<E> implements Tree<E> {
         Optional<Node<E>> findParent = findBy(parent);
         Optional<Node<E>> findChild = findBy(child);
         boolean rsl = false;
+
         if (findParent.isPresent() && findChild.isEmpty()) {
             Node<E> newChild = new Node<>(child);
             findParent.get().children.add(newChild);
@@ -28,8 +29,10 @@ public class SimpleTree<E> implements Tree<E> {
         Optional<Node<E>> rsl = Optional.empty();
         Queue<Node<E>> data = new LinkedList<>();
         data.offer(this.root);
+
         while (!data.isEmpty()) {
             Node<E> el = data.poll();
+
             if (el.value.equals(value)) {
                 rsl = Optional.of(el);
                 break;
