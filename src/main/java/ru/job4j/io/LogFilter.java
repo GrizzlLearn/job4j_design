@@ -13,7 +13,7 @@ public class LogFilter {
         try (BufferedReader in = new BufferedReader(new FileReader(file))) {
             in.lines().forEach((line) -> {
                 String[] tmp = line.split(regexp);
-                if (tmp[tmp.length - 2].equals(template)) {
+                if (template.equals(tmp[tmp.length - 2])) {
                     result.add(line);
                 }
             });
