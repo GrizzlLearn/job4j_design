@@ -23,7 +23,7 @@ public class Config {
                             .filter(this::validateBlank)
                             .filter(this::validateStart)
                     .filter(this::validate)
-                    .map(s-> s.split("=", 2))
+                    .map(s -> s.split("=", 2))
                     .collect(Collectors.toMap(
                             s -> s[0],
                             s -> s[1],
