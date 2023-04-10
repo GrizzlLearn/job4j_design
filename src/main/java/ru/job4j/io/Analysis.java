@@ -17,6 +17,7 @@ public class Analysis {
                 if (!server && checkServAvailable(line)) {
                     server = true;
                     writer.write(line.split(" ", 2)[1]);
+                    writer.write(";");
                     writer.write(System.lineSeparator());
                 }
             }
