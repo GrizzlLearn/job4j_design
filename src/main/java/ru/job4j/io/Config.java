@@ -19,9 +19,7 @@ public class Config {
     public void load() {
         try (BufferedReader read = new BufferedReader(new FileReader(this.path))) {
             values.putAll(read.lines()
-                    .filter(s -> !s.isBlank() || !s.startsWith("#"))
-                            .filter(this::validateBlank)
-                            .filter(this::validateStart)
+                    .filter(s -> !s.isBlank() && !s.startsWith("#"))
                     .filter(this::validate)
                     .map(s -> s.split("=", 2))
                     .collect(Collectors.toMap(
@@ -31,14 +29,6 @@ public class Config {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    private boolean validateBlank(String str) {
-        return !str.isBlank();
-    }
-
-    private boolean validateStart(String str) {
-        return !str.startsWith("#");
     }
 
     private boolean validate(String str) {
