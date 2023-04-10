@@ -6,6 +6,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.StringJoiner;
+import java.util.stream.Collectors;
 
 public class Config {
     private final String path;
@@ -16,55 +17,44 @@ public class Config {
     }
 
     public void load() {
-        StringJoiner out = new StringJoiner(System.lineSeparator());
-
         try (BufferedReader read = new BufferedReader(new FileReader(this.path))) {
-            read.lines().forEach(out::add);
-            String[] tmp = out.toString().split(System.lineSeparator());
-
-            for (String item : tmp) {
-                addToMap(item);
-            }
+            values.putAll(read.lines()
+                    .filter(s -> !s.isBlank() || !s.startsWith("#"))
+                            .filter(this::validateBlank)
+                            .filter(this::validateStart)
+                    .filter(this::validate)
+                    .map(s-> s.split("=", 2))
+                    .collect(Collectors.toMap(
+                            s -> s[0],
+                            s -> s[1],
+                            (e, n) -> e)));
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private void addToMap(String item) {
-        String regex = "=";
-        char sample = '=';
-        String[] tmp = new String[2];
-
-        if (item.length() > 0 && item.charAt(0) != '#') {
-            if (countSamplesInString(item, sample) >= 1) {
-                tmp[0] = item.split(regex, 2)[0];
-                tmp[1] = item.split(regex, 2)[1];
-                values.putIfAbsent(tmp[0], tmp[1]);
-            } else {
-                checkForBrokenConfigString(item, regex, sample);
-            }
-        }
+    private boolean validateBlank(String str) {
+        return !str.isBlank();
     }
 
-    private void checkForBrokenConfigString(String item, String regex, char sample) {
-        if (item.charAt(0) == sample
-                || item.charAt(item.length() - 1) == sample
-                || !item.contains(regex)) {
-            throw new IllegalArgumentException("Config file is broken!");
-        }
+    private boolean validateStart(String str) {
+        return !str.startsWith("#");
     }
 
-    private int countSamplesInString(String item, char sample) {
-        int result = 0;
-        char[] tmp = item.toCharArray();
-
-        for (char c : tmp) {
-            if (c == sample) {
-                result++;
-            }
+    private boolean validate(String str) {
+        if (!str.contains("=")) {
+            throw new IllegalArgumentException(
+                    String.format("this name: %s does not contain the symbol \"=\"", str));
         }
-
-        return result;
+        if (str.startsWith("=")) {
+            throw new IllegalArgumentException(
+                    String.format("this name: %s does not contain a key", str));
+        }
+        if (str.indexOf("=") == str.length() - 1) {
+            throw new IllegalArgumentException(
+                    String.format("this name: %s does not contain a value", str));
+        }
+        return true;
     }
 
     public String value(String key) {

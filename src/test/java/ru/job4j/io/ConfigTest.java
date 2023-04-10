@@ -27,7 +27,7 @@ class ConfigTest {
         Config config = new Config(path);
         assertThatThrownBy(config::load)
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("Config file is broken!");
+                .hasMessage("this name: name3= does not contain a value");
     }
 
     @Test
