@@ -4,17 +4,17 @@ import java.io.*;
 
 public class Analysis {
     public void unavailable(String source, String target) {
-        boolean server = true;
+        boolean isServerOn = true;
         try (BufferedReader reader = new BufferedReader(new FileReader(source));
              BufferedWriter writer = new BufferedWriter(new PrintWriter(target))) {
             while (reader.ready()) {
                 String line = reader.readLine();
-                if ((server && !checkServAvailable(line)) || (!server && checkServAvailable(line))) {
-                    server = !server;
-                    writer.write(line.split(" ", 2)[1]);
-                    writer.write(";");
-                    if (server) {
-                        writer.write(System.lineSeparator());
+                if (isServerOn == !checkServAvailable(line)) {
+                    isServerOn = !isServerOn;
+                    writer.append(line.split(" ", 2)[1]);
+                    writer.append(";");
+                    if (isServerOn) {
+                        writer.append(System.lineSeparator());
                     }
                 }
             }
@@ -29,7 +29,7 @@ public class Analysis {
 
     public static void main(String[] args) {
         Analysis analysis = new Analysis();
-        analysis.unavailable("data/server1.log", "data/target.csv");
+        analysis.unavailable("data/server.log", "data/target.csv");
     }
 }
 
