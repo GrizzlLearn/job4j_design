@@ -9,16 +9,13 @@ public class Analysis {
              BufferedWriter writer = new BufferedWriter(new PrintWriter(target))) {
             while (reader.ready()) {
                 String line = reader.readLine();
-                if (server && !checkServAvailable(line)) {
-                    server = false;
+                if ((server && !checkServAvailable(line)) || (!server && checkServAvailable(line))) {
+                    server = !server;
                     writer.write(line.split(" ", 2)[1]);
                     writer.write(";");
-                }
-                if (!server && checkServAvailable(line)) {
-                    server = true;
-                    writer.write(line.split(" ", 2)[1]);
-                    writer.write(";");
-                    writer.write(System.lineSeparator());
+                    if (server) {
+                        writer.write(System.lineSeparator());
+                    }
                 }
             }
         } catch (IOException e) {
@@ -32,7 +29,7 @@ public class Analysis {
 
     public static void main(String[] args) {
         Analysis analysis = new Analysis();
-        analysis.unavailable("data/server.log", "data/target.csv");
+        analysis.unavailable("data/server1.log", "data/target.csv");
     }
 }
 
