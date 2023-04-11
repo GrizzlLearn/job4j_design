@@ -11,11 +11,9 @@ public class Analysis {
                 String line = reader.readLine();
                 if (isServerOn == !checkServAvailable(line)) {
                     isServerOn = !isServerOn;
-                    writer.append(line.split(" ", 2)[1]);
-                    writer.append(";");
-                    if (isServerOn) {
-                        writer.append(System.lineSeparator());
-                    }
+                    writer.append(line.split(" ", 2)[1])
+                            .append(";")
+                            .append(isServerOn ? System.lineSeparator() : "");
                 }
             }
         } catch (IOException e) {
