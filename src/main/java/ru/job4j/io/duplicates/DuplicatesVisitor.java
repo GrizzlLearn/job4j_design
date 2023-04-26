@@ -7,25 +7,28 @@ import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.*;
 
-public class DuplicatesVisitor extends SimpleFileVisitor<Path>{
-    Map<Integer, FileProperty> tmpMap = new HashMap<>();
-    Map <Path, FileProperty> listOfDuplicates = new HashMap<>();
+public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
+    private Map<FileProperty, List<Path>> tmpMap = new HashMap<>();
 
     @Override
     public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
         FileProperty fp = new FileProperty(attrs.size(), file.getFileName().toString());
-        Map <Path, FileProperty> tmp = new HashMap<>();
+        List<Path> tmpListPath = new ArrayList<>();
 
-        if (!tmpMap.containsKey(fp.hashCode())) {
-            tmpMap.put(fp.hashCode(), fp);
+        if (!tmpMap.containsKey(fp)) {
+            tmpMap.put(fp, tmpListPath);
         } else {
-            tmp.put(file.toAbsolutePath(), fp);
+            tmpMap.get(fp).add(file.toAbsolutePath());
         }
-
-        listOfDuplicates = tmp;
-        listOfDuplicates.forEach((k, v) -> System.out.printf("Key: %s, Value: %s \n", k.toAbsolutePath(), v.getSize()));
 
         return super.visitFile(file, attrs);
     }
 
+    public ArrayList<Path> printPathOfDuplicates() {
+        ArrayList<Path> result = new ArrayList<>();
+
+        tmpMap.forEach((k, v) -> result.addAll(v));
+
+        return result;
+    }
 }
