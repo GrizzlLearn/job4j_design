@@ -16,6 +16,7 @@ public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
         List<Path> tmpListPath = new ArrayList<>();
 
         if (!tmpMap.containsKey(fp)) {
+            tmpListPath.add(file.toAbsolutePath());
             tmpMap.put(fp, tmpListPath);
         } else {
             tmpMap.get(fp).add(file.toAbsolutePath());
@@ -27,7 +28,11 @@ public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
     public ArrayList<Path> printPathOfDuplicates() {
         ArrayList<Path> result = new ArrayList<>();
 
-        tmpMap.forEach((k, v) -> result.addAll(v));
+        tmpMap.forEach((k, v) -> {
+            if (v.size() > 1) {
+                result.addAll(v);
+            }
+        });
 
         return result;
     }
