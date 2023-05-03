@@ -25,6 +25,24 @@ public class Search {
             throw new IllegalArgumentException("Filetype is null. Add filetype in \"Program Arguments\".");
         }
 
+        if (args.length > 2) {
+            throw new IllegalArgumentException(new StringBuilder()
+                    .append("To many arguments. Max 2, you have ")
+                    .append(args.length).toString());
+        }
+
+        if (args[0].length() > 1) {
+            throw new IllegalArgumentException("Root folder must be \".\".");
+        }
+
+        if (args[1] != null && !args[1].startsWith(".")) {
+            throw new IllegalArgumentException("You must use \".filetype\" pattern.");
+        }
+
+        if (args[1] != null && !args[1].matches("(.*?)\\.(java|yaml|xml|js|md)$")) {
+            throw new IllegalArgumentException("You must use next filetypes: java, yaml, xml, js, md.");
+        }
+
         return true;
     }
 
