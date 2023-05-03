@@ -9,11 +9,38 @@ public class ArgsName {
 
     public String get(String key) {
         /* TODO add the necessary checks. */
+        if (!values.containsKey(key)) {
+            throw new IllegalArgumentException(
+                    new StringBuilder().append("This key: ")
+                            .append("\'")
+                            .append(key)
+                            .append("\'")
+                            .append(" is missing")
+                            .toString()
+            );
+        }
+
         return values.get(key);
     }
 
     private void parse(String[] args) {
         /* TODO parse args to values. */
+
+        if (args.length < 1) {
+            throw new IllegalArgumentException("Arguments not passed to program");
+        }
+
+        String regForSplitValue = "^.*=";
+        String regForSplitKey = "=.*";
+
+
+
+        for (String arg : args) {
+            String[] keys = arg.split(regForSplitKey);
+            String[] values = arg.split(regForSplitValue);
+            this.values.putIfAbsent(keys[0].substring(1), values[1]);
+        }
+
     }
 
     public static ArgsName of(String[] args) {
