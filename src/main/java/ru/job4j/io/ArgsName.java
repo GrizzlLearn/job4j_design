@@ -8,7 +8,17 @@ public class ArgsName {
     private final Map<String, String> values = new HashMap<>();
 
     public String get(String key) {
-        /* TODO add the necessary checks. */
+        String result = "";
+
+        if (validateKey(key)) {
+            result = values.get(key);
+        }
+
+        return result;
+    }
+
+    private boolean validateKey(String key) {
+
         if (!values.containsKey(key)) {
             throw new IllegalArgumentException(
                     String.format("This key: '%s' is missing", key)
@@ -21,30 +31,55 @@ public class ArgsName {
             );
         }
 
-        return values.get(key);
+        return true;
+    }
+
+    private boolean validateArg(String arg) {
+
+        if (!arg.startsWith("-")) {
+            throw new IllegalArgumentException(
+                    String.format("Error: This argument '%s' does not start with a '-' character", arg)
+            );
+        }
+
+        if (!arg.contains("=")) {
+            throw new IllegalArgumentException(
+                    String.format("Error: This argument '%s' does not contain an equal sign", arg)
+            );
+        }
+
+        if (arg.matches("^-[a-zA-Z]+=$")) {
+            throw new IllegalArgumentException(
+                    String.format("Error: This argument '%s' does not contain a value", arg)
+            );
+        }
+
+        if (arg.matches("^\\W{2,}")) {
+            throw new IllegalArgumentException(
+                    String.format("Error: This argument '%s' does not contain a key", arg)
+            );
+        }
+
+        return true;
     }
 
     private void parse(String[] args) {
-        /* TODO parse args to values. */
 
         if (args.length < 1) {
             throw new IllegalArgumentException("Arguments not passed to program");
         }
 
         String regForSplitKey = "-*=";
-        //String regForSplitValue = "-*=";
 
         for (String arg : args) {
-            String[] keys = arg.split(regForSplitKey);
-            //String[] values = arg.split(regForSplitValue);
-            //this.values.putIfAbsent(keys[0].substring(1), values[1]);
-            this.values.putIfAbsent(keys[0].substring(1), keys[1]);
+            if (validateArg(arg)) {
+                String[] keys = arg.split(regForSplitKey, 2);
+                this.values.putIfAbsent(keys[0].substring(1), keys[1]);
+            }
         }
-
     }
 
     public static ArgsName of(String[] args) {
-        /* TODO add the necessary checks. */
         ArgsName names = new ArgsName();
         names.parse(args);
         return names;
