@@ -1,5 +1,6 @@
 package ru.job4j.io;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
@@ -17,30 +18,26 @@ public class Search {
 
     private static boolean validate(String[] args) {
 
-        if (args.length == 0) {
-            throw new IllegalArgumentException("Root folder is null. Usage ROOT_FOLDER.");
+        if (args.length != 2) {
+            throw new IllegalArgumentException(String.format("Wrong number of parameters, must be %s", 2));
         }
 
-        if (args.length == 1) {
-            throw new IllegalArgumentException("Filetype is null. Add filetype in \"Program Arguments\".");
+        File file = new File(args[0]);
+
+        if (!file.exists()) {
+            throw new IllegalArgumentException("You must set EXIST ROOT DIRECTORY.");
         }
 
-        if (args.length > 2) {
-            throw new IllegalArgumentException(new StringBuilder()
-                    .append("To many arguments. Max 2, you have ")
-                    .append(args.length).toString());
+        if (!file.isDirectory()) {
+            throw new IllegalArgumentException("You must set ROOT DIRECTORY, not FILE.");
         }
 
-        if (args[0].length() > 1) {
-            throw new IllegalArgumentException("Root folder must be \".\".");
-        }
-
-        if (args[1] != null && !args[1].startsWith(".")) {
+        if (!args[1].startsWith(".")) {
             throw new IllegalArgumentException("You must use \".filetype\" pattern.");
         }
 
-        if (args[1] != null && !args[1].matches("(.*?)\\.(java|yaml|xml|js|md)$")) {
-            throw new IllegalArgumentException("You must use next filetypes: java, yaml, xml, js, md.");
+        if (!args[1].matches("(.[a-z]*)")) {
+            throw new IllegalArgumentException("You must set filetypes");
         }
 
         return true;
