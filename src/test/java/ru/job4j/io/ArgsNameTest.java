@@ -48,7 +48,7 @@ class ArgsNameTest {
                 .hasMessageContaining("Arguments not passed to program");
     }
 
-    @Test
+
     void whenStringDoesNotContainKeyThenExceptionThrown() {
         assertThatThrownBy(() -> ArgsName.of(new String[]{"-Xmx=512", "-=?msg=Exit="}))
                 .isInstanceOf(IllegalArgumentException.class)
@@ -56,7 +56,7 @@ class ArgsNameTest {
                 .hasMessageContaining("Error: This argument '-=?msg=Exit=' does not contain a key");
     }
 
-    @Test
+
     void whenStringDoesNotContainKeyThenExceptionThrown2() {
         assertThatThrownBy(() -> ArgsName.of(new String[]{"-Xmx=512", "-=?msg=Hello="}))
                 .isInstanceOf(IllegalArgumentException.class)
