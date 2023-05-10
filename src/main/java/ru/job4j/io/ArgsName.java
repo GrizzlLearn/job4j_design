@@ -11,12 +11,13 @@ public class ArgsName {
         /* TODO add the necessary checks. */
         if (!values.containsKey(key)) {
             throw new IllegalArgumentException(
-                    new StringBuilder().append("This key: ")
-                            .append("\'")
-                            .append(key)
-                            .append("\'")
-                            .append(" is missing")
-                            .toString()
+                    String.format("This key: '%s' is missing", key)
+            );
+        }
+
+        if (values.get(key).length() == 0) {
+            throw new IllegalArgumentException(
+                    String.format("Error: This argument '%s' does not contain a value", key)
             );
         }
 
@@ -30,15 +31,14 @@ public class ArgsName {
             throw new IllegalArgumentException("Arguments not passed to program");
         }
 
-        String regForSplitValue = "^.*=";
-        String regForSplitKey = "=.*";
-
-
+        String regForSplitKey = "-*=";
+        //String regForSplitValue = "-*=";
 
         for (String arg : args) {
             String[] keys = arg.split(regForSplitKey);
-            String[] values = arg.split(regForSplitValue);
-            this.values.putIfAbsent(keys[0].substring(1), values[1]);
+            //String[] values = arg.split(regForSplitValue);
+            //this.values.putIfAbsent(keys[0].substring(1), values[1]);
+            this.values.putIfAbsent(keys[0].substring(1), keys[1]);
         }
 
     }
