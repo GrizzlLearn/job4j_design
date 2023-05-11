@@ -42,6 +42,12 @@ public class ArgsName {
             );
         }
 
+        if (arg.startsWith("-=")) {
+            throw new IllegalArgumentException(
+                    String.format("Error: This argument '%s' does not contain a key", arg)
+            );
+        }
+
         if (!arg.contains("=")) {
             throw new IllegalArgumentException(
                     String.format("Error: This argument '%s' does not contain an equal sign", arg)
@@ -51,12 +57,6 @@ public class ArgsName {
         if (arg.matches("^-[a-zA-Z]+=$")) {
             throw new IllegalArgumentException(
                     String.format("Error: This argument '%s' does not contain a value", arg)
-            );
-        }
-
-        if (arg.matches("^\\W{2,}")) {
-            throw new IllegalArgumentException(
-                    String.format("Error: This argument '%s' does not contain a key", arg)
             );
         }
 
