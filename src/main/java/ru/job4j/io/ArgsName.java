@@ -54,7 +54,7 @@ public class ArgsName {
             );
         }
 
-        if (arg.matches("^-[a-zA-Z]+=$")) {
+        if (arg.matches("^-[a-zA-Z_0-9]+=$")) {
             throw new IllegalArgumentException(
                     String.format("Error: This argument '%s' does not contain a value", arg)
             );
