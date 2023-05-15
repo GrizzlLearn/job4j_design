@@ -54,10 +54,21 @@ public class ArgsName {
             );
         }
 
-        if (arg.matches("^-[a-zA-Z_0-9]+=$")) {
-            throw new IllegalArgumentException(
-                    String.format("Error: This argument '%s' does not contain a value", arg)
-            );
+        if (arg.startsWith("-") && arg.endsWith("=")) {
+            char[] chars = arg.toCharArray();
+            int count = 0;
+
+            for (char c : chars) {
+                if (c == '=') {
+                    count++;
+                }
+            }
+
+            if (count == 1) {
+                throw new IllegalArgumentException(
+                        String.format("Error: This argument '%s' does not contain a value", arg)
+                );
+            }
         }
 
         return true;
