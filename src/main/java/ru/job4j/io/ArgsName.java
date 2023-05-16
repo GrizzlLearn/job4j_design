@@ -8,16 +8,6 @@ public class ArgsName {
     private final Map<String, String> values = new HashMap<>();
 
     public String get(String key) {
-        String result = "";
-
-        if (validateKey(key)) {
-            result = values.get(key);
-        }
-
-        return result;
-    }
-
-    private boolean validateKey(String key) {
 
         if (!values.containsKey(key)) {
             throw new IllegalArgumentException(
@@ -25,13 +15,7 @@ public class ArgsName {
             );
         }
 
-        if (values.get(key).length() == 0) {
-            throw new IllegalArgumentException(
-                    String.format("Error: This argument '%s' does not contain a value", key)
-            );
-        }
-
-        return true;
+        return values.get(key);
     }
 
     private boolean validateArg(String arg) {
@@ -55,15 +39,7 @@ public class ArgsName {
         }
 
         if (arg.startsWith("-") && arg.endsWith("=")) {
-            char[] chars = arg.toCharArray();
-            int count = 0;
-
-            for (char c : chars) {
-                if (c == '=') {
-                    count++;
-                }
-            }
-
+            long count = arg.chars().filter(ch -> ch == '=').count();
             if (count == 1) {
                 throw new IllegalArgumentException(
                         String.format("Error: This argument '%s' does not contain a value", arg)
