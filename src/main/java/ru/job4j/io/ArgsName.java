@@ -38,13 +38,10 @@ public class ArgsName {
             );
         }
 
-        if (arg.startsWith("-") && arg.endsWith("=")) {
-            long count = arg.chars().filter(ch -> ch == '=').count();
-            if (count == 1) {
-                throw new IllegalArgumentException(
-                        String.format("Error: This argument '%s' does not contain a value", arg)
-                );
-            }
+        if (arg.indexOf("=") == arg.length() - 1) {
+            throw new IllegalArgumentException(
+                    String.format("Error: This argument '%s' does not contain a value", arg)
+            );
         }
 
         return true;
