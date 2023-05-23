@@ -45,24 +45,28 @@ public class Zip {
         List<File> lf = new ArrayList<>();
 
         for (Path path : Search.search(Paths.get(name.get(test[0])), predicate)) {
-            lf.add(new File(path.getFileName().toString()));
+            lf.add(path.toFile());
         }
-
-        lf.forEach(System.out::println);
 
         zip.packFiles(lf, new File("../job4j_design.zip"));
 
-
-        /*System.out.println(
-                Search.search(
-                        Paths.get(name.get(test[0])),
-                        predicate));*/
-
-        //Search.search(ArgsName.of(args).get(args[0]), p -> p.toFile().getName().endsWith(args[1]));
-
-        /*zip.packSingleFile(
-                new File("pom.xml"),
-                new File("pom.zip")
-        );*/
+        /**
+         *
+         *  lf.forEach(System.out::println);
+         *
+         *  System.out.println(path.toFile());
+         *
+         *         System.out.println(
+         *                 Search.search(
+         *                         Paths.get(name.get(test[0])),
+         *                         predicate));
+         *
+         *         Search.search(ArgsName.of(args).get(args[0]), p -> p.toFile().getName().endsWith(args[1]));
+         *
+         *         zip.packSingleFile(
+         *                 new File("pom.xml"),
+         *                 new File("pom.zip")
+         *         );
+         */
     }
 }
