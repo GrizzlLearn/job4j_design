@@ -12,17 +12,23 @@ import java.util.zip.ZipOutputStream;
 public class Zip {
 
     public void packFiles(List<File> sources, File target) {
-        sources.forEach(s -> {
-            try (ZipOutputStream zip = new ZipOutputStream(new BufferedOutputStream(new FileOutputStream(target)))) {
-                zip.putNextEntry(new ZipEntry(s.getPath()));
+        try (ZipOutputStream zip = new ZipOutputStream(new BufferedOutputStream(new FileOutputStream(target)))) {
+            sources.forEach(s -> {
+                try {
+                    zip.putNextEntry(new ZipEntry(s.getPath()));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 try (BufferedInputStream out = new BufferedInputStream(new FileInputStream(s))) {
                     zip.write(out.readAllBytes());
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
-    }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    };
 
     public void packSingleFile(File source, File target) {
         try (ZipOutputStream zip = new ZipOutputStream(new BufferedOutputStream(new FileOutputStream(target)))) {
@@ -37,36 +43,15 @@ public class Zip {
 
     public static void main(String[] args) throws IOException {
         Zip zip = new Zip();
-
         ArgsName name = ArgsName.of(args);
-        String[] test = new String[]{"d", "e", "o"};
-        Predicate<Path> predicate = p -> !p.toFile().getName().endsWith(name.get(test[1]));
-
         List<File> lf = new ArrayList<>();
+        String[] parameterNames = new String[]{"d", "e", "o"};
+        Predicate<Path> predicate = p -> !p.toFile().getName().endsWith(name.get(parameterNames[1]));
 
-        for (Path path : Search.search(Paths.get(name.get(test[0])), predicate)) {
+        for (Path path : Search.search(Paths.get(name.get(parameterNames[0])), predicate)) {
             lf.add(path.toFile());
         }
 
         zip.packFiles(lf, new File("../job4j_design.zip"));
-
-        /**
-         *
-         *  lf.forEach(System.out::println);
-         *
-         *  System.out.println(path.toFile());
-         *
-         *         System.out.println(
-         *                 Search.search(
-         *                         Paths.get(name.get(test[0])),
-         *                         predicate));
-         *
-         *         Search.search(ArgsName.of(args).get(args[0]), p -> p.toFile().getName().endsWith(args[1]));
-         *
-         *         zip.packSingleFile(
-         *                 new File("pom.xml"),
-         *                 new File("pom.zip")
-         *         );
-         */
     }
 }
