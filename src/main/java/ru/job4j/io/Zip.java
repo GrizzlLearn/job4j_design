@@ -25,7 +25,7 @@ public class Zip {
         }
     }
 
-    private static boolean validateRoot(String root) {
+    private static boolean validateRootAndTarget(String root, File target) {
         File file = new File(root);
 
         if (!file.exists()) {
@@ -35,11 +35,6 @@ public class Zip {
         if (!file.isDirectory()) {
             throw new IllegalArgumentException("You must set ROOT DIRECTORY, not FILE.");
         }
-
-        return true;
-    }
-
-    private static boolean validateTarget(File target) {
 
         if (target.exists()) {
             throw new IllegalArgumentException("A file with the same name already EXISTS.");
@@ -57,13 +52,11 @@ public class Zip {
         String root = name.get(parametersArray[0]);
         File target = new File("../job4j_design.zip");
 
-        if (validateRoot(root)) {
+        if (validateRootAndTarget(root, target)) {
             for (Path path : Search.search(Paths.get(root), predicate)) {
                 lf.add(path.toFile());
             }
-        }
 
-        if (validateTarget(target)) {
             zip.packFiles(lf, target);
             System.out.println("Archiving is complete!");
         }
