@@ -1,5 +1,8 @@
 package ru.job4j.io;
 
+import java.io.*;
+import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ConsoleChat {
@@ -19,15 +22,26 @@ public class ConsoleChat {
     }
 
     private List<String> readPhrases() {
-        return null;
+        List<String> result = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(this.botAnswers))) {
+            br.lines().forEach(result::add);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return result;
     }
 
     private void saveLog(List<String> log) {
-
+        try (PrintWriter pw = new PrintWriter(new FileWriter(path, Charset.defaultCharset(), true))) {
+            log.forEach(pw::println);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void main(String[] args) {
-        ConsoleChat cc = new ConsoleChat("", "");
+        ConsoleChat cc = new ConsoleChat("./data/ConsoleChat_log.txt", "./data/ConsoleChat_botAnswers.txt");
         cc.run();
     }
 }
