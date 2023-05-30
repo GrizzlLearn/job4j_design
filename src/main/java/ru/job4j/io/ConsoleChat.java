@@ -13,6 +13,7 @@ public class ConsoleChat {
     private static final String CONTINUE = "продолжить";
     private final String path;
     private final String botAnswers;
+    private List<String> log = new ArrayList<>();
 
     public ConsoleChat(String path, String botAnswers) {
         this.path = path;
@@ -21,7 +22,6 @@ public class ConsoleChat {
 
     public void run() {
         Scanner scanner = new Scanner(System.in);
-        List<String> log = new ArrayList<>();
         String humanInput = "";
         String greetings = "Hello! Let's try to chat!";
         String stopAnswer = "You stopped me(";
@@ -32,19 +32,31 @@ public class ConsoleChat {
         while (!OUT.equals(humanInput)) {
             String botAnswer = readPhrases().get(new Random().nextInt(readPhrases().size()));
             humanInput = scanner.nextLine();
-            log.add(String.format("Ввод пользователя: %s", humanInput));
 
             if (STOP.equals(humanInput)) {
+                log.add(String.format("Ввод пользователя: %s", humanInput));
                 System.out.println(stopAnswer);
+                log.add(String.format("Ответ бота: %s", stopAnswer));
+
+                while(!CONTINUE.equals(humanInput)) {
+                    humanInput = scanner.nextLine();
+                    log.add(String.format("Ввод пользователя: %s", humanInput));
+
+                    if (CONTINUE.equals(humanInput)) {
+                        System.out.println(contAnswer);
+                        log.add(String.format("Ответ бота: %s", contAnswer));
+                    }
+                }
             }
 
-            if (CONTINUE.equals(humanInput)) {
-                System.out.println(contAnswer);
+            if (!OUT.equals(humanInput) && !CONTINUE.equals(humanInput)) {
+                log.add(String.format("Ввод пользователя: %s", humanInput));
+                System.out.println(botAnswer);
+                log.add(String.format("Ответ бота: %s", botAnswer));
             }
-            log.add(String.format("Ответ бота: %s", botAnswer));
-            System.out.println(botAnswer);
         }
 
+        log.add(String.format("Ввод пользователя: %s", humanInput));
         saveLog(log);
     }
 
