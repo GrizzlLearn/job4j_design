@@ -22,6 +22,8 @@ public class ConsoleChat {
 
     public void run() {
         Scanner scanner = new Scanner(System.in);
+        List<String> botAnswers = readPhrases();
+        Random random = new Random();
         String humanInput = "";
         String greetings = "Hello! Let's try to chat!";
         String stopAnswer = "You stopped me(";
@@ -30,7 +32,7 @@ public class ConsoleChat {
         log.add(greetings);
 
         while (!OUT.equals(humanInput)) {
-            String botAnswer = readPhrases().get(new Random().nextInt(readPhrases().size()));
+            String botAnswer = botAnswers.get(random.nextInt(botAnswers.size()));
             humanInput = scanner.nextLine();
 
             if (STOP.equals(humanInput)) {
