@@ -61,4 +61,31 @@ class CSVReaderTest {
         CSVReader.handle(argsName);
         assertThat(Files.readString(target.toPath())).isEqualTo(expected);
     }
+
+    @Test
+    void whenFilterReverseColumns(@TempDir Path folder) throws Exception {
+        String data = String.join(
+                System.lineSeparator(),
+                "name,age,last_name,education",
+                "Tom,20,Smith,Bachelor",
+                "Jack,25,Johnson,Undergraduate",
+                "William,30,Brown,Secondary special"
+        );
+        File file = folder.resolve("source.csv").toFile();
+        File target = folder.resolve("target.csv").toFile();
+        ArgsName argsName = ArgsName.of(new String[]{
+                "-path=" + file.getAbsolutePath(), "-delimiter=,",
+                "-out=" + target.getAbsolutePath(), "-filter=education,last_name,age,name"
+        });
+        Files.writeString(file.toPath(), data);
+        String expected = String.join(
+                System.lineSeparator(),
+                "education,last_name,age,name",
+                "Bachelor,Smith,20,Tom",
+                "Undergraduate,Johnson,25,Jack",
+                "Secondary special,Brown,30,William"
+        ).concat(System.lineSeparator());
+        CSVReader.handle(argsName);
+        assertThat(Files.readString(target.toPath())).isEqualTo(expected);
+    }
 }
