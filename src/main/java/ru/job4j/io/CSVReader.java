@@ -35,7 +35,10 @@ public class CSVReader {
             result.append(System.lineSeparator());
         }
 
-        System.out.println(result);
+        try (BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(argsName.get("out")))) {
+            out.write(result.toString().getBytes());
+        }
+
     }
 
     private static boolean validateArgs(ArgsName args) {
