@@ -37,8 +37,9 @@ public class CSVReader {
 
         try (BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(argsName.get("out")))) {
             out.write(result.toString().getBytes());
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-
     }
 
     private static boolean validateArgs(ArgsName args) {
@@ -56,7 +57,6 @@ public class CSVReader {
     }
 
     public static void main(String[] args) throws Exception {
-        /* здесь добавьте валидацию принятых параметров*/
         ArgsName argsName = ArgsName.of(args);
         if (validateArgs(argsName)) {
             handle(argsName);
