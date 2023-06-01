@@ -13,15 +13,18 @@ public class CSVReader {
         List<List<String>> finalList = new ArrayList<>();
 
         StringBuilder result = new StringBuilder();
-        Scanner scanner = new Scanner(file);
 
-        while (scanner.hasNext()) {
-            for (String s : scanner.nextLine().split(System.lineSeparator())) {
-                finalList.add(new ArrayList<>(List.of(s.split(delimiter))));
-                if (s.contains(filter.get(0))) {
-                    tmp.addAll(List.of(s.split(delimiter)));
+        try (Scanner scanner = new Scanner(file)) {
+            while (scanner.hasNext()) {
+                for (String s : scanner.nextLine().split(System.lineSeparator())) {
+                    finalList.add(new ArrayList<>(List.of(s.split(delimiter))));
+                    if (s.contains(filter.get(0))) {
+                        tmp.addAll(List.of(s.split(delimiter)));
+                    }
                 }
             }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
         for (List<String> stringList : finalList) {
