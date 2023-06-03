@@ -58,17 +58,20 @@ public class CSVReader {
         File source = new File(args.get("path"));
 
         if (!source.exists()) {
-            throw new IllegalArgumentException("You must set EXIST FILE.");
+            throw new IllegalArgumentException("You need set EXIST FILE.");
         }
 
         if (!source.isFile()) {
-            throw new IllegalArgumentException("You must set FILE, not DIRECTORY.");
+            throw new IllegalArgumentException("You need set FILE, not DIRECTORY.");
         }
 
         if (!source.getName().endsWith("csv")) {
-            throw new IllegalArgumentException("You must set CSV file");
+            throw new IllegalArgumentException("You need set CSV file.");
         }
 
+        if (args.get("delimiter").matches("^[\\W]{2,}")) {
+            throw new IllegalArgumentException("You need set ONE delimiter, not CHAR or NUM.");
+        }
     }
 
     public static void main(String[] args) throws Exception {
