@@ -14,7 +14,6 @@ public class CSVReader {
         List<String> tmp = new ArrayList<>();
         List<List<String>> finalList = new ArrayList<>();
         StringBuilder result = new StringBuilder();
-
         try (Scanner scanner = new Scanner(file)) {
             while (scanner.hasNext()) {
                 for (String s : scanner.nextLine().split(System.lineSeparator())) {
@@ -27,7 +26,6 @@ public class CSVReader {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         for (List<String> stringList : finalList) {
             for (int i = 0; i < filter.size(); i++ ) {
                 result.append(stringList.get(tmp.indexOf(filter.get(i))));
@@ -38,7 +36,6 @@ public class CSVReader {
             }
             result.append(System.lineSeparator());
         }
-
         giveBackResult(result, outType);
     }
 
@@ -56,21 +53,18 @@ public class CSVReader {
 
     private static void validateArgs(ArgsName args) {
         File source = new File(args.get("path"));
-
+        String delimiter = args.get("delimiter");
         if (!source.exists()) {
             throw new IllegalArgumentException("You need set EXIST FILE.");
         }
-
         if (!source.isFile()) {
             throw new IllegalArgumentException("You need set FILE, not DIRECTORY.");
         }
-
         if (!source.getName().endsWith("csv")) {
             throw new IllegalArgumentException("You need set CSV file.");
         }
-
-        if (args.get("delimiter").matches("^[\\W]{2,}")) {
-            throw new IllegalArgumentException("You need set ONE delimiter, not CHAR or NUM.");
+        if (!";".equals(delimiter) && !",".equals(delimiter)) {
+            throw new IllegalArgumentException("You need set ONE DELIMITER ',' or ';'");
         }
     }
 
