@@ -5,13 +5,14 @@ import java.util.*;
 
 public class CSVReader {
     public static void handle(ArgsName argsName) throws Exception {
+        validateArgs(argsName);
+        String outType = argsName.get("out");
         File file = new File(argsName.get("path"));
         String filterDelimiter = ",";
         String delimiter = argsName.get("delimiter");
         List<String> filter = new ArrayList<>(Arrays.stream(argsName.get("filter").split(filterDelimiter)).toList());
         List<String> tmp = new ArrayList<>();
         List<List<String>> finalList = new ArrayList<>();
-
         StringBuilder result = new StringBuilder();
 
         try (Scanner scanner = new Scanner(file)) {
@@ -38,31 +39,40 @@ public class CSVReader {
             result.append(System.lineSeparator());
         }
 
-        try (BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(argsName.get("out")))) {
-            out.write(result.toString().getBytes());
-        } catch (IOException e) {
-            e.printStackTrace();
+        giveBackResult(result, outType);
+    }
+
+    private static void giveBackResult(StringBuilder result, String outType) {
+        if ("stdout".equals(outType)) {
+            System.out.println(result);
+        } else {
+            try (BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(outType))) {
+                out.write(result.toString().getBytes());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
-    private static boolean validateArgs(ArgsName args) {
-        File file = new File(args.get("path"));
+    private static void validateArgs(ArgsName args) {
+        File source = new File(args.get("path"));
 
-        if (!file.exists()) {
+        if (!source.exists()) {
             throw new IllegalArgumentException("You must set EXIST FILE.");
         }
 
-        if (!file.isFile()) {
+        if (!source.isFile()) {
             throw new IllegalArgumentException("You must set FILE, not DIRECTORY.");
         }
 
-        return true;
+        if (!source.getName().endsWith("csv")) {
+            throw new IllegalArgumentException("You must set CSV file");
+        }
+
     }
 
     public static void main(String[] args) throws Exception {
         ArgsName argsName = ArgsName.of(args);
-        if (validateArgs(argsName)) {
-            handle(argsName);
-        }
+        handle(argsName);
     }
 }
