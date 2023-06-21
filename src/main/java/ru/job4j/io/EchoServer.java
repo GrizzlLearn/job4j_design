@@ -27,11 +27,11 @@ public class EchoServer {
                     System.out.println(str);
                     out.flush();
                 } catch (IOException e) {
-                    LOG.error("Exception in socket input stream", e);
+                    LOG.error("Exception in EchoServer", e);
                 }
             }
         } catch (IOException e) {
-            LOG.error("Exception in server socket", e);
+            LOG.error("Exception in EchoServer", e);
         }
     }
 }
