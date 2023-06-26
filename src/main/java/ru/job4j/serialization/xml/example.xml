@@ -1,0 +1,20 @@
+<?xml version="1.1" encoding="UTF-8"?>
+<!DOCTYPE object SYSTEM "object.dtd">
+<object>
+    <boolField>true</boolField>
+    <intField>42</intField>
+    <stringField>Hello, world!</stringField>
+    <objectField>
+        <object1>
+            <stringField>Inner object</stringField>
+            <intField>123</intField>
+        </object1>
+    </objectField>
+    <arrayField>
+        <array>
+            <element>Item 1</element>
+            <element>Item 2</element>
+            <element>Item 3</element>
+        </array>
+    </arrayField>
+</object>
