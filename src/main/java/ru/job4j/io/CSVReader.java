@@ -27,7 +27,7 @@ public class CSVReader {
             e.printStackTrace();
         }
         for (List<String> stringList : finalList) {
-            for (int i = 0; i < filter.size(); i++ ) {
+            for (int i = 0; i < filter.size(); i++) {
                 result.append(stringList.get(tmp.indexOf(filter.get(i))));
 
                 if (i + 1 < filter.size()) {

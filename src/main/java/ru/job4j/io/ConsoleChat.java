@@ -40,7 +40,7 @@ public class ConsoleChat {
                 System.out.println(stopAnswer);
                 log.add(String.format("Ответ бота: %s", stopAnswer));
 
-                while(!CONTINUE.equals(humanInput)) {
+                while (!CONTINUE.equals(humanInput)) {
                     humanInput = scanner.nextLine();
                     log.add(String.format("Ввод пользователя: %s", humanInput));
 

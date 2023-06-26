@@ -3,7 +3,7 @@ package ru.job4j.serialization.java;
 import java.io.*;
 import java.nio.file.Files;
 
-public class Contact implements Serializable{
+public class Contact implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
     private final int zipCode;
@@ -24,10 +24,10 @@ public class Contact implements Serializable{
 
     @Override
     public String toString() {
-        return "Contact{" +
-                "zipCode=" + zipCode +
-                ", phone='" + phone + '\'' +
-                '}';
+        return "Contact{"
+                + "zipCode=" + zipCode
+                + ", phone='" + phone + '\''
+                + '}';
     }
 
     public static void main(String[] args) throws IOException, ClassNotFoundException {
