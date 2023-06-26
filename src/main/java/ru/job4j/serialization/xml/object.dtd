@@ -1,0 +1,9 @@
+<!ELEMENT object (boolField, intField, stringField, objectField, arrayField)>
+<!ELEMENT boolField (#PCDATA)>
+<!ELEMENT intField (#PCDATA)>
+<!ELEMENT stringField (#PCDATA)>
+<!ELEMENT objectField (object1)>
+<!ELEMENT object1 (stringField, intField)>
+<!ELEMENT arrayField (array)>
+<!ELEMENT array (element+)>
+<!ELEMENT element (#PCDATA)>
