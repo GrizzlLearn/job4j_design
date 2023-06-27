@@ -6,7 +6,6 @@ import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 
 @XmlRootElement(name = "window")
