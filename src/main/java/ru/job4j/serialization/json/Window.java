@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-
 @XmlRootElement(name = "window")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Window {
