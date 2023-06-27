@@ -3,18 +3,32 @@ package ru.job4j.serialization.json;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import javax.xml.bind.annotation.*;
 import java.util.Arrays;
 
+
+@XmlRootElement(name = "window")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Window {
-    private final float height;
-    private final float weight;
-    private final String manufacturer;
-    private final boolean isHasSpecialGlass;
+    @XmlAttribute
+    private float height;
+    @XmlAttribute
+    private float weight;
+    @XmlAttribute
+    private String manufacturer;
+    @XmlAttribute
+    private boolean isHasSpecialGlass;
 
-    private final String[] fittings;
-    private final Glass glass;
+    @XmlElementWrapper(name = "fittings")
+    @XmlElement(name = "fitting")
+    private String[] fittings;
+    private Glass glass;
 
-    Window(float height, float weight, String manufacturer, boolean isHasSpecialGlass, String[] fittings, Glass glass) {
+    public Window() {
+
+    }
+
+    public Window(float height, float weight, String manufacturer, boolean isHasSpecialGlass, String[] fittings, Glass glass) {
         this.height = height;
         this.weight = weight;
         this.manufacturer = manufacturer;
@@ -33,21 +47,6 @@ public class Window {
                 + ", fittings= " + Arrays.toString(fittings)
                 + ", glass=" + glass
                 + '}';
-    }
-
-    public static class Glass {
-        private final float refractiveIndex;
-
-        public Glass(float refractiveIndex) {
-            this.refractiveIndex = refractiveIndex;
-        }
-
-        @Override
-        public String toString() {
-            return "Glass{"
-                    + "refractiveIndex=" + refractiveIndex
-                    + '}';
-        }
     }
 
     public static void main(String[] args) {
