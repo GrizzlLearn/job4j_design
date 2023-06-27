@@ -1,0 +1,496 @@
+1. Что такое поток ввода-вывода?
+
+[2.2.1. Ввод-вывод 1.0. Потоки ввода-вывода](https://job4j.ru/profile/exercise/45/task-view/1018)
+
+[2.2.1. Ввод-вывод 0.1. FileOutputStream.](https://job4j.ru/profile/exercise/45/task-view/306)
+
+[2.2.1. Ввод-вывод 0.2. FileInputStream](https://job4j.ru/profile/exercise/45/task-view/307)
+
+[Ввод-вывод Wiki](https://ru.wikipedia.org/wiki/%D0%92%D0%B2%D0%BE%D0%B4-%D0%B2%D1%8B%D0%B2%D0%BE%D0%B4)
+
+Java 9, Полное руководство - Герберт Шилдт. Глава 13 (Раздел "Потоки ввода-вывода"), Глава 21 (Разделы "Классы потоков ввода-вывода")
+
+
+
+2. Что такое Java IO?
+
+[2.2.1. Ввод-вывод 1.0. Потоки ввода-вывода](https://job4j.ru/profile/exercise/45/task-view/1018)
+
+[Основные отличия Java IO и Java NIO](https://habr.com/ru/post/235585/)
+
+Java 9, Полное руководство - Герберт Шилдт. Глава 21.
+
+[Документация IO](https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/io/package-summary.html)
+
+
+
+3. Что такое Java NIO?
+
+[2.2.1. Ввод-вывод 1.1. Java NIO/NIO.2 API](https://job4j.ru/profile/exercise/45/task-view/1019)
+
+[Основные отличия Java IO и Java NIO](https://habr.com/ru/post/235585/)
+
+Java 9, Полное руководство - Герберт Шилдт. Глава 22.
+
+[Документация NIO](https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/nio/package-summary.html)
+
+
+
+4. Что такое NIO.2?
+
+[2.2.1. Ввод-вывод 1.1. Java NIO/NIO.2 API](https://job4j.ru/profile/exercise/45/task-view/1019)
+
+[Основные отличия Java IO и Java NIO](https://habr.com/ru/post/235585/)
+
+Java 9, Полное руководство - Герберт Шилдт. Глава 22 (Раздел "Усовершенствования в системе NIO.2")
+
+
+
+5. Что такое Scanner?
+
+[2.2.1. Ввод-вывод 7. Scanner](https://job4j.ru/profile/exercise/45/task-view/786)
+
+Java 9, Полное руководство - Герберт Шилдт. Глава 20 (Раздел "Класс Scanner")
+
+[Документация Scanner](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Scanner.html)
+
+
+
+6. Как работает Scanner внутри?
+
+[2.2.1. Ввод-вывод 7. Scanner](https://job4j.ru/profile/exercise/45/task-view/786)
+
+Java 9, Полное руководство - Герберт Шилдт. Глава 20 (Раздел "Класс Scanner")
+
+[Документация Scanner](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Scanner.html)
+
+
+
+7. Какие базовые методы существуют в Scanner?
+
+[2.2.1. Ввод-вывод 7. Scanner](https://job4j.ru/profile/exercise/45/task-view/786)
+
+Java 9, Полное руководство - Герберт Шилдт. Глава 20 (Раздел "Класс Scanner")
+
+[Документация Scanner](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Scanner.html)
+
+
+
+8. Что такое байтовый поток? Как он реализован внутри?
+
+[2.2.1. Ввод-вывод 1.0. Потоки ввода-вывода](https://job4j.ru/profile/exercise/45/task-view/1018)
+
+Java 9, Полное руководство - Герберт Шилдт. Глава 21 (Раздел "Потоки ввода-вывода байтов", "Класс InputStream", "Класс OutputStream" и остальные).
+
+[Документация InputStream](https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/io/InputStream.html)
+
+[Документация OutputStream](https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/io/OutputStream.html)
+
+
+
+9. Что такое символьный поток? Как он реализован внутри?
+
+[2.2.1. Ввод-вывод 1.0. Потоки ввода-вывода](https://job4j.ru/profile/exercise/45/task-view/1018)
+
+Java 9, Полное руководство - Герберт Шилдт. Глава 21 (Разделы "Потоки ввода-вывода символов", "Класс Reader", "Класс Writer" и остальные)
+
+[Документация Reader](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/Reader.html)
+
+[Документация Writer](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/Writer.html)
+
+
+
+10. Что такое буферизированный поток?
+
+[2.2.1. Ввод-вывод 5.0. Буферизированные потоки](https://job4j.ru/profile/exercise/45/task-view/1059)
+
+[2.2.1. Ввод-вывод 0.3. BufferedReader.](https://job4j.ru/profile/exercise/45/task-view/308)
+
+[2.2.1. Ввод-вывод 0.4. BufferedOutputStream](https://job4j.ru/profile/exercise/45/task-view/309)
+
+
+Java 9, Полное руководство - Герберт Шилдт. Глава 21 (Разделы "Буферизированные потоки ввода-вывода байтов", "Класс Reader", "Класс Writer" и остальные)
+
+[Документация BufferedInputStream](https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/io/BufferedInputStream.html)
+
+[Документация BufferedOutputStream](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/BufferedOutputStream.html)
+
+[Документация BufferedReader](https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/io/BufferedReader.html)
+
+[Документация BufferedWriter](https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/io/BufferedWriter.html)
+
+
+
+11. Какие классы-обёртки позволяют ускорить чтение/запись за счет использования буфера?
+
+[2.2.1. Ввод-вывод 5.0. Буферизированные потоки](https://job4j.ru/profile/exercise/45/task-view/1059)
+
+[2.2.1. Ввод-вывод 0.3. BufferedReader.](https://job4j.ru/profile/exercise/45/task-view/308)
+
+[2.2.1. Ввод-вывод 0.4. BufferedOutputStream](https://job4j.ru/profile/exercise/45/task-view/309)
+
+
+Java 9, Полное руководство - Герберт Шилдт. Глава 21 (Разделы "Буферизированные потоки ввода-вывода байтов", "Класс Reader", "Класс Writer" и остальные)
+
+[Документация BufferedInputStream](https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/io/BufferedInputStream.html)
+
+[Документация BufferedOutputStream](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/BufferedOutputStream.html)
+
+[Документация BufferedReader](https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/io/BufferedReader.html)
+
+[Документация BufferedWriter](https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/io/BufferedWriter.html)
+
+
+
+12. Как осуществляется ввод и вывод из командной строки?
+
+[2.2.1. Ввод-вывод 1.0. Потоки ввода-вывода](https://job4j.ru/profile/exercise/45/task-view/1018)
+
+Java 9, Полное руководство - Герберт Шилдт. Глава 13 (Разделы "Предопределенные потоки ввода-вывода", "Чтение данных, вводимых с консоли" и "Запись данных, выводимых на консоль")
+
+
+
+13. Что такое класс Console? Расскажите его АПИ.
+
+[2.2.1. Ввод-вывод 18. Класс Console](https://job4j.ru/profile/exercise/45/task-view/1071)
+
+Java 9, Полное руководство - Герберт Шилдт. Глава 21 (Раздел "Класс Console")
+
+[Документация Console](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/Console.html)
+
+
+
+14. Что такое поток данных? Data stream.
+
+[2.2.1. Ввод-вывод 19. Потоки данных (Data Streams)](https://job4j.ru/profile/exercise/45/task-view/1069)
+
+Java 9, Полное руководство - Герберт Шилдт. Глава 21 (Раздел "Классы DataOutputStream и DataInputStream")
+
+[Документация DataInputStream](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/DataInputStream.html)
+
+[Документация DataOutputStream](https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/io/DataOutputStream.html)
+
+
+
+15. Что такое поток объектов, Object stream.
+
+[2.2.1. Ввод-вывод 21. Потоки объектов. (Object streams)](https://job4j.ru/profile/exercise/45/task-view/1072)
+
+Java 9, Полное руководство - Герберт Шилдт. Глава 21 (Разделы "Интерфейс ObjectInput", "Класс ObjectInputStream", "Интерфейс ObjectOutput", "Класс ObjectOutputStream")
+
+[Документация ObjectInput](https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/io/ObjectInput.html)
+
+[Документация ObjectInputStream](https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/io/ObjectInputStream.html)
+
+[Документация ObjectOutput](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/io/ObjectOutput.html)
+
+[Документация ObjectOutputStream](https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/io/ObjectOutputStream.html)
+
+
+
+16. Что такое Path? Как он реализуется на разных ОС?
+
+[2.2.1. Ввод-вывод 9.1. Файлы и директории. Классы Path, Files, Paths](https://job4j.ru/profile/exercise/45/task-view/1016)
+
+[Pathосные новшества JDK7. Работа с файловой системой](https://habr.com/ru/sandbox/25126/)
+
+Java 9, Полное руководство - Герберт Шилдт. Глава 22 (Раздел "Интерфейс Path")
+
+[Документация Path](https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/nio/file/Path.html)
+
+
+
+17. Как получить список файлов?
+
+[2.2.1. Ввод-вывод 9.0. Файлы и директории. Класс File](https://job4j.ru/profile/exercise/45/task-view/313)
+
+[2.2.1. Ввод-вывод 10. Сканирование файловой системы](https://job4j.ru/profile/exercise/45/task-view/314)
+
+[Разбор утилиты Files.walkFileTree();](https://habr.com/ru/post/437694/)
+
+
+Java 9, Полное руководство - Герберт Шилдт. Глава 22 (Разделы "Перечисление содержимого каталога" и "Перечисление дерева каталогов с помощью метода walkFileTree()")
+
+[Документация Walking The File Tree](https://docs.oracle.com/javase/tutorial/essential/io/walk.html)
+
+[Документация File.list()](https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/io/File.html#list())
+
+[Документация File.listFiles()](https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/io/File.html#listFiles())
+
+[Документация Files.walkFileTree()](https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/nio/file/Files.html#walkFileTree(java.nio.file.Path,java.nio.file.FileVisitor))
+
+
+
+18. Как проверить что файловая сущность является файлом или папкой?
+
+[2.2.1. Ввод-вывод 9.0. Файлы и директории. Класс File](https://job4j.ru/profile/exercise/45/task-view/313)
+
+Java 9, Полное руководство - Герберт Шилдт. Глава 21 (Раздел "Класс File")
+
+[Документация File.isFile()](https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/io/File.html#isFile())
+
+[Документация File.isDirectory()](https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/io/File.html#isDirectory())
+
+
+
+19. Как удалить файл?
+
+[2.2.1. Ввод-вывод 9.0. Файлы и директории. Класс File](https://job4j.ru/profile/exercise/45/task-view/313)
+
+Java 9, Полное руководство - Герберт Шилдт. Глава 21 (Раздел "Класс File")
+
+[Документация File.delete()](https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/io/File.html#delete())
+
+
+
+20. Как переместить файл?
+
+[2.2.1. Ввод-вывод 9.0. Файлы и директории. Класс File](https://job4j.ru/profile/exercise/45/task-view/313)
+
+Java 9, Полное руководство - Герберт Шилдт. Глава 21 (Раздел "Класс File")
+
+[Документация File.renameTo()](https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/io/File.html#renameTo(java.io.File))
+
+[Документация Files.move()](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/nio/file/Files.html#move(java.nio.file.Path,java.nio.file.Path,java.nio.file.CopyOption...))
+
+
+
+21. Как управлять атрибутами файла?
+
+[2.2.1. Ввод-вывод 9.2. Атрибуты файла](https://job4j.ru/profile/exercise/45/task-view/1021)
+
+[Pathосные новшества JDK7. Работа с файловой системой](https://habr.com/ru/sandbox/25126/)
+
+[Документация FileAttributeView](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/nio/file/attribute/FileAttributeView.html) (В нем перечислены все подинтерфейсы).
+
+Java 9, Полное руководство - Герберт Шилдт. Глава 22 (Раздел "Интерфейсы атрибутов файлов")
+
+
+
+22. Как создать файл?
+
+[2.2.1. Ввод-вывод 9.0. Файлы и директории. Класс File](https://job4j.ru/profile/exercise/45/task-view/313)
+
+[2.2.1. Ввод-вывод 0.1. FileOutputStream.](https://job4j.ru/profile/exercise/45/task-view/306)
+
+Java 9, Полное руководство - Герберт Шилдт. Глава 21 (Разделы "Класс File" и "Класс FileOutputStream")
+
+[Документация File.createNewFile()](https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/io/File.html#createNewFile())
+
+[Документация Files.write()](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/nio/file/Files.html#write(java.nio.file.Path,byte%5B%5D,java.nio.file.OpenOption...))
+
+[Документация Files.createFile()](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/nio/file/Files.html#createFile(java.nio.file.Path,java.nio.file.attribute.FileAttribute...))
+
+
+23. Как создать директорию?
+
+[2.2.1. Ввод-вывод 9.0. Файлы и директории. Класс File](https://job4j.ru/profile/exercise/45/task-view/313)
+
+Java 9, Полное руководство - Герберт Шилдт. Глава 21 (Раздел "Создание каталогов")
+
+[Документация Files.createDirectories()](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/nio/file/Files.html#createDirectories(java.nio.file.Path,java.nio.file.attribute.FileAttribute...)) (также createDirectory())
+
+[Документация File.mkdirs()](https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/io/File.html#mkdirs()) (также mkdir())
+
+
+
+24. Как записать в файл?
+
+[2.2.1. Ввод-вывод 0.1. FileOutputStream.](https://job4j.ru/profile/exercise/45/task-view/306)
+
+Java 9, Полное руководство - Герберт Шилдт. Глава 13 (Раздел "Запись данных, выводимых на консоль")
+
+[Документация OutputStream](https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/io/OutputStream.html) (методы write())
+
+[Документация Writer](https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/io/Writer.html) (методы write())
+
+
+
+25. Как прочитать данные из файла?
+
+[2.2.1. Ввод-вывод 0.2. FileInputStream](https://job4j.ru/profile/exercise/45/task-view/307)
+
+[2.2.1. Ввод-вывод 7. Scanner](https://job4j.ru/profile/exercise/45/task-view/786)
+
+[Документация Scanner](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Scanner.html)
+
+Java 9, Полное руководство - Герберт Шилдт. Глава 13 (Разделы "Чтение данных, вводимых с консоли", "Чтение символов" и "Чтение символьных строк"), Глава 20 (Раздел "Класс Scanner").
+
+[Документация Reader](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/Reader.html) (методы read())
+
+[Документация BufferedReader](https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/io/BufferedReader.html) (методы read() и readLine())
+
+
+
+26. Для чего нужны классы PrintStream и PrintWriter? В чем их различие?
+
+[2.2.1. Ввод-вывод 3. Классы вывода PrintStream / PrintWriter](https://job4j.ru/profile/exercise/45/task-view/1079)
+
+Java 9, Полное руководство - Герберт Шилдт. Глава 21 (Разделы "Класс PrintStream" и "Класс PrintWriter")
+
+[Документация PrintStream](https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/io/PrintStream.html)
+
+[Документация PrintWriter](https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/io/PrintWriter.html)
+
+
+
+27. Что такое потоки байтовых массивов? Как они устроены?
+
+[2.2.1. Ввод-вывод 4. Потоки байтовых массивов (ByteArray Streams)](https://job4j.ru/profile/exercise/45/task-view/1078)
+
+Java 9, Полное руководство - Герберт Шилдт. Глава 21 (Разделы "Класс ByteArrayInputStream" и "Класс ByteArrayOutputStream")
+
+[Документация ByteArrayOutputStream](https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/io/ByteArrayOutputStream.html)
+
+[Документация ByteArrayInputStream](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/ByteArrayInputStream.html)
+
+
+
+28. Зачем нужен класс RandomAccessFile?
+
+[2.2.1. Ввод-вывод 20. Файл произвольного доступа. RandomAccessFile](https://job4j.ru/profile/exercise/45/task-view/1080)
+
+Java 9, Полное руководство - Герберт Шилдт. Глава 21 (Раздел "Класс RandomAccessFile")
+
+[Документация RandomAccessFile](https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/io/RandomAccessFile.html)
+
+
+
+29. Данные в каком виде можно считывать байтовыми и символьными потоками?
+
+[2.2.1. Ввод-вывод 5.0. Буферизированные потоки](https://job4j.ru/profile/exercise/45/task-view/1059) (в конце)
+
+
+
+30. Что такое сокет?
+
+[2.2.2. Socket 2. Что такое Socket?](https://job4j.ru/profile/exercise/46/task-view/320)
+
+
+
+31. Какие виды сокетов есть в Java? С каким протоколом они работают?
+
+[2.2.2. Socket 2. Что такое Socket?](https://job4j.ru/profile/exercise/46/task-view/320)
+
+[2.2.2. Socket 1. Протокол HTTP](https://job4j.ru/profile/exercise/46/task-view/906)
+
+
+Java 9, Полное руководство - Герберт Шилдт. Глава 23 (Разделы "Клиентские сокеты по протоколу TCP/IP" и "Серверные сокеты по протоколу TCP/IP").
+
+[Документация Socket](https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/net/Socket.html)
+
+[Документация ServerSocket](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/net/ServerSocket.html)
+
+
+
+32. Как отправить через сокет сообщение?
+
+[2.2.2. Socket 2. Что такое Socket?](https://job4j.ru/profile/exercise/46/task-view/320)
+
+[2.2.2. Socket 3. Бот](https://job4j.ru/profile/exercise/46/task-view/321)
+
+[Первое знакомство с протоколом HTTP через написание простейшего Web сервера на Java](https://habr.com/ru/post/441150/)
+
+
+
+33. Что такое логирование?
+
+[2.2.3. Логирование 1. Log4j. Логирование системы.](https://job4j.ru/profile/exercise/47/task-view/322)
+
+[Логирование Wiki](https://ru.wikipedia.org/wiki/%D0%A4%D0%B0%D0%B9%D0%BB_%D0%B6%D1%83%D1%80%D0%BD%D0%B0%D0%BB%D0%B0)
+
+
+34. Какие уровни логирования вы знаете?
+
+[2.2.3. Логирование 1. Log4j. Логирование системы.](https://job4j.ru/profile/exercise/47/task-view/322)
+
+[Документация Log4j](https://logging.apache.org/log4j/2.x/manual/architecture.html) (Раздел "LoggerConfig - Log levels")
+
+
+
+35. Какая библиотека для логирования используется в курсе? Как ее настроить?
+
+[2.2.3. Логирование 1. Log4j. Логирование системы.](https://job4j.ru/profile/exercise/47/task-view/322)
+
+[2.2.3. Логирование 2. Simple Logging Facade 4 Java.](https://job4j.ru/profile/exercise/47/task-view/323)
+
+[Java logging. Hello World](https://habr.com/ru/post/247647/) (Разделы "Log4j" и "Slf4j")
+
+
+36. Опишите из каких элементов состоит формат JSON
+
+[2.2.4. Сериализация 2. Формат JSON](https://job4j.ru/profile/exercise/174/task-view/327)
+
+[Что такое JSON — Введение](https://habr.com/ru/sandbox/167077/)
+
+[JSON Wiki](https://ru.wikipedia.org/wiki/JSON)
+
+
+
+37. Как преобразовать POJO в/из json?
+
+[2.2.4. Сериализация 5. Преобразование JSON в POJO. JsonObject](https://job4j.ru/profile/exercise/174/task-view/330)
+
+[POJO Wiki](https://ru.wikipedia.org/wiki/POJO)
+
+
+
+38. Опишите из каких элементов состоит формат XML
+
+[2.2.4. Сериализация 3. Формат XML](https://job4j.ru/profile/exercise/174/task-view/328)
+
+[Что такое XML](https://habr.com/ru/post/524288/)
+
+[XML Wiki](https://ru.wikipedia.org/wiki/XML)
+
+
+39. Как преобразовать POJO в/из xml?
+
+[2.2.4. Сериализация 4. JAXB. Преобразование XML в POJO.](https://job4j.ru/profile/exercise/174/task-view/329)
+
+
+40. Что такое сериализация / десериализация?
+
+[2.2.4. Сериализация 1. Что такое Сериализация?](https://job4j.ru/profile/exercise/174/task-view/326)
+
+[Сериализация в Java](https://habr.com/ru/post/60317/)
+
+[Сериализация в Java. Не все так просто](https://habr.com/ru/post/431524/)
+
+[Документация Serializable](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/Serializable.html)
+
+
+
+41. Что такое регулярные выражения? Зачем они нужны?
+
+[2.2.1. Ввод-вывод Регулярные выражения. Введение](https://job4j.ru/profile/exercise/45/task-view/997)
+
+[Обработка строк в Java. Часть II: Pattern, Matcher](https://habr.com/ru/post/260773/)
+
+[Регулярные выражения в Java на примере адреса электронной почты](https://habr.com/ru/post/267205/)
+
+Java 9, Полное руководство - Герберт Шилдт. Глава 30 (Раздел "Обработка регулярных выражений")
+
+
+
+42. Как создать регулярное выражение в Java?
+
+[2.2.1. Ввод-вывод Регулярные выражения. Введение](https://job4j.ru/profile/exercise/45/task-view/997)
+
+[Обработка строк в Java. Часть II: Pattern, Matcher](https://habr.com/ru/post/260773/)
+
+[Регулярные выражения в Java на примере адреса электронной почты](https://habr.com/ru/post/267205/)
+
+Java 9, Полное руководство - Герберт Шилдт. Глава 30 (Раздел "Обработка регулярных выражений")
+
+
+
+43. Что такое метасимволы? Для чего они применяются в регулярных выражениях?
+
+[2.2.1. Ввод-вывод Регулярные выражения. Метасимволы, квантификаторы, классы символов.](https://job4j.ru/profile/exercise/45/task-view/998)
+
+[Обработка строк в Java. Часть II: Pattern, Matcher](https://habr.com/ru/post/260773/)
+
+[Регулярные выражения в Java на примере адреса электронной почты](https://habr.com/ru/post/267205/)
+
+Java 9, Полное руководство - Герберт Шилдт. Глава 30 (Раздел "Обработка регулярных выражений")
