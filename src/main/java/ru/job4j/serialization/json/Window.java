@@ -2,10 +2,10 @@ package ru.job4j.serialization.json;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-
 import javax.xml.bind.annotation.*;
+import java.util.ArrayList;
 import java.util.Arrays;
-
+import java.util.List;
 
 @XmlRootElement(name = "window")
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -21,20 +21,44 @@ public class Window {
 
     @XmlElementWrapper(name = "fittings")
     @XmlElement(name = "fitting")
-    private String[] fittings;
+    private List<String> fittings;
     private Glass glass;
 
     public Window() {
 
     }
 
-    public Window(float height, float weight, String manufacturer, boolean isHasSpecialGlass, String[] fittings, Glass glass) {
+    public Window(float height, float weight, String manufacturer, boolean isHasSpecialGlass, List<String> fittings, Glass glass) {
         this.height = height;
         this.weight = weight;
         this.manufacturer = manufacturer;
         this.isHasSpecialGlass = isHasSpecialGlass;
         this.fittings = fittings;
         this.glass = glass;
+    }
+
+    public float getHeight() {
+        return height;
+    }
+
+    public float getWeight() {
+        return weight;
+    }
+
+    public String getManufacturer() {
+        return manufacturer;
+    }
+
+    public boolean isHasSpecialGlass() {
+        return isHasSpecialGlass;
+    }
+
+    public Glass getGlass() {
+        return glass;
+    }
+
+    public List<String> getFittings() {
+        return fittings;
     }
 
     @Override
@@ -44,7 +68,7 @@ public class Window {
                 + ", weight=" + weight
                 + ", manufacturer='" + manufacturer + '\''
                 + ", isHasSpecialGlass=" + isHasSpecialGlass
-                + ", fittings= " + Arrays.toString(fittings)
+                + ", fittings= " + fittings.toString()
                 + ", glass=" + glass
                 + '}';
     }
@@ -56,7 +80,7 @@ public class Window {
                 2.5f,
                 "REHAU",
                 true,
-                new String[]{"handle", "hinge", "fasteners"},
+                new ArrayList<>(Arrays.asList("handle", "hinge", "fasteners")),
                 new Glass(1.4f)
         );
 

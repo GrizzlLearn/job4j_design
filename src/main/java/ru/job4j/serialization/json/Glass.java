@@ -16,6 +16,10 @@ public class Glass {
         this.refractiveIndex = refractiveIndex;
     }
 
+    public float getRefractiveIndex() {
+        return refractiveIndex;
+    }
+
     @Override
     public String toString() {
         return "Glass{"
