@@ -19,8 +19,8 @@ create table owners(
 );
 
 create table pictures_owners (
-    pictures_inventory_id int references pictures(inventory_id),
-    owners_id int references owners(owners_id)
+    pictures_inventory_id int references pictures(inventory_id) unique ,
+    owners_id int references owners(owners_id) unique
 );
 
 INSERT INTO pictures(title, inventory_id) VALUES ('picture_name_0', 123456);
