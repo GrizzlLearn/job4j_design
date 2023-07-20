@@ -69,5 +69,3 @@ INSERT INTO attaches_table(item_id)
 SELECT s1.item_id
 FROM items_table s1
 WHERE item_id = 1;
-
-select * from attaches_table;
