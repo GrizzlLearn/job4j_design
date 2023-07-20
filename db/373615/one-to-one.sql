@@ -19,17 +19,15 @@ create table owners(
 );
 
 create table pictures_owners (
-    id serial primary key,
     pictures_inventory_id int references pictures(inventory_id),
-    owners_id int references owners(owners_id),
-    owners_pseudonym char(255)
+    owners_id int references owners(owners_id)
 );
 
 INSERT INTO pictures(title, inventory_id) VALUES ('picture_name_0', 123456);
 INSERT INTO owners(pseudonym) VALUES ('owner_pseudonym_0');
 
-INSERT INTO pictures_owners(pictures_inventory_id, owners_id, owners_pseudonym)
-SELECT s1.inventory_id, s2.owners_id, s2.pseudonym
+INSERT INTO pictures_owners(pictures_inventory_id, owners_id)
+SELECT s1.inventory_id, s2.owners_id
 FROM pictures s1
 INNER JOIN owners s2 ON s2.owners_id = s1.pictures_id;
 
