@@ -30,9 +30,14 @@ CREATE TABLE states_table(
 );
 
 CREATE TABLE roles_rules_table(
-    id serial PRIMARY KEY,
-    role_name char(255) REFERENCES roles_table(role_name),
-    rule_name char(255) REFERENCES rules_table(rule_name)
+    role_id int REFERENCES roles_table(role_id),
+    rule_id int REFERENCES rules_table(rule_id)
+);
+
+CREATE TABLE users_table(
+    user_id serial PRIMARY KEY,
+    user_name char(255) UNIQUE,
+    role_id int REFERENCES roles_table(role_id)
 );
 
 CREATE TABLE items_table(
@@ -40,15 +45,9 @@ CREATE TABLE items_table(
     item_key char(255) UNIQUE,
     item_summary VARCHAR,
     item_description TEXT,
-    item_category char(255) REFERENCES categories_table(category_name),
-    item_status char(255) REFERENCES states_table(state_name)
-);
-
-CREATE TABLE users_table(
-    user_id serial PRIMARY KEY,
-    user_name char(255) UNIQUE ,
-    role_name char(255) REFERENCES roles_table(role_name),
-    item_key char(255) REFERENCES items_table(item_key)
+    item_category int REFERENCES categories_table(category_id),
+    item_status int REFERENCES states_table(state_id),
+    user_id int REFERENCES users_table(user_id)
 );
 
 CREATE TABLE comments_table(

@@ -10,10 +10,24 @@ INSERT INTO categories_table(category_name) VALUES ('category_name_1');
 INSERT INTO states_table(state_name) VALUES ('state_name_0');
 INSERT INTO states_table(state_name) VALUES ('state_name_1');
 
-INSERT INTO roles_rules_table(role_name, rule_name)
-SELECT s1.role_name, s2.rule_name
+INSERT INTO roles_rules_table(role_id, rule_id)
+SELECT s1.role_id, s2.rule_id
 FROM roles_table s1
 INNER JOIN rules_table s2 ON s2.rule_id = s1.role_id;
+
+INSERT INTO users_table(user_name)
+VALUES ('user_name_0');
+
+UPDATE users_table
+SET role_id = (SELECT role_id FROM roles_table WHERE role_name = 'role_name_1')
+WHERE user_name = 'user_name_0';
+
+INSERT INTO users_table(user_name)
+VALUES ('user_name_1');
+
+UPDATE users_table
+SET role_id = (SELECT role_id FROM roles_table WHERE role_name = 'role_name_0')
+WHERE user_name = 'user_name_1';
 
 INSERT INTO items_table(item_key, item_summary, item_description)
 VALUES ('TEST-1', 'TEST SUMMARY 1', 'TEST DESCRIPTION 1');
@@ -21,35 +35,17 @@ VALUES ('TEST-1', 'TEST SUMMARY 1', 'TEST DESCRIPTION 1');
 INSERT INTO items_table(item_key, item_summary, item_description)
 VALUES ('TEST-2', 'TEST SUMMARY 2', 'TEST DESCRIPTION 2');
 
-/*
- Не сообразил как за одну транзакцию сделать VALUES и SELECT, поэтому
- использовал обновление
- */
 UPDATE items_table
-SET item_category = (SELECT category_name FROM categories_table WHERE category_name = 'category_name_0'),
-    item_status = (SELECT state_name FROM states_table WHERE state_name = 'state_name_1')
+SET item_category = (SELECT category_id FROM categories_table WHERE category_name = 'category_name_0'),
+    item_status = (SELECT state_id FROM states_table WHERE state_name = 'state_name_1'),
+    user_id = (SELECT user_id FROM users_table WHERE user_name = 'user_name_0')
 WHERE item_key = 'TEST-1';
 
 UPDATE items_table
-SET item_category = (SELECT category_name FROM categories_table WHERE category_name = 'category_name_1'),
-    item_status = (SELECT state_name FROM states_table WHERE state_name = 'state_name_0')
+SET item_category = (SELECT category_id FROM categories_table WHERE category_name = 'category_name_1'),
+    item_status = (SELECT state_id FROM states_table WHERE state_name = 'state_name_0'),
+    user_id = (SELECT user_id FROM users_table WHERE user_name = 'user_name_1')
 WHERE item_key = 'TEST-2';
-
-INSERT INTO users_table(user_name)
-VALUES ('user_name_0');
-
-UPDATE users_table
-SET role_name = (SELECT role_name FROM roles_table WHERE role_name = 'role_name_1'),
-    item_key = (SELECT item_key FROM items_table WHERE item_id = 1 )
-WHERE user_name = 'user_name_0';
-
-INSERT INTO users_table(user_name)
-VALUES ('user_name_1');
-
-UPDATE users_table
-SET role_name = (SELECT role_name FROM roles_table WHERE role_name = 'role_name_0'),
-    item_key = (SELECT item_key FROM items_table WHERE item_id = 2 )
-WHERE user_name = 'user_name_1';
 
 INSERT INTO comments_table(comment_body)
 VALUES ('COMMENT BODY 0');
