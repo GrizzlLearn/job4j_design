@@ -39,7 +39,7 @@ WHERE kt.keyboards_type = '75%';
 
 SELECT kt.keyboards_type AS "Тип Клавиатуры", kn.keys_num AS "Количество клавиш"
 FROM keyboards_type AS kt
-         INNER JOIN keys_num
-    AS kn
-                    ON kt.id = kn.id
+    INNER JOIN keys_num
+        AS kn
+        ON kt.id = kn.id
 WHERE kn.keys_num = 104;
