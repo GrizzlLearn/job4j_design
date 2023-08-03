@@ -88,5 +88,5 @@ WHERE e.dep_id IS NOT NULL;
 SELECT *
 FROM teens t1
 CROSS JOIN teens t2
-WHERE t1.teem_gender != t2.teem_gender
+WHERE t1.teem_gender != t2.teem_gender AND t1.teen_id < t2.teen_id
 ORDER BY t1.teen_name;
