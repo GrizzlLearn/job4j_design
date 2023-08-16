@@ -1,10 +1,10 @@
 drop database if exists views;
 create database views;
 
-drop table if exists Customers;
+drop table if exists OrderDetails CASCADE;
+drop table if exists Customers CASCADE;
 drop table if exists Products;
 drop table if exists Orders;
-drop table if exists OrderDetails;
 
 CREATE TABLE Customers (
     CustomerID INT PRIMARY KEY,
@@ -58,6 +58,8 @@ VALUES
     (2002, 1001, 102, 2),
     (2003, 1002, 103, 5),
     (2004, 1003, 101, 1);
+
+/* Вычисляем общее количество продуктов и общую стоимость заказа для каждого заказа */
 
 CREATE VIEW OrderSummary AS
 SELECT
