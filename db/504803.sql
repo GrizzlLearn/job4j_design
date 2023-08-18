@@ -24,7 +24,7 @@ $$
 BEGIN
     update products
     set price = price * 1.2
-    where id = (select id from inserted) and count <= 5;
+    where id in (select id from inserted) and count <= 5;
     return new;
 END;
 $$
