@@ -1,60 +1,124 @@
 package ru.job4j.jdbc;
 
-import java.sql.Connection;
-import java.sql.DatabaseMetaData;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.sql.*;
 import java.util.Properties;
 import java.util.StringJoiner;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 public class TableEditor implements AutoCloseable {
+    private static final Logger LOG = LogManager.getLogger(TableEditor.class.getName());
 
     private Connection connection;
 
-    private Properties properties;
+    private final Properties properties;
 
     public TableEditor(Properties properties) {
         this.properties = properties;
         initConnection();
     }
 
-    private void initConnection() {
-        connection = null;
+    private void initConnection(){
+        try {
+            connection = DriverManager.getConnection(
+                    properties.getProperty("url"),
+                    properties.getProperty("login"),
+                    properties.getProperty("password")
+            );
+        } catch (SQLException e) {
+            System.out.println("Ошибка соединения с БД");
+            LOG.error("An SQLException occurred:", e);
+        }
     }
 
-    //TODO
     /*
     создает пустую таблицу без столбцов с указанным именем;
      */
     public void createTable(String tableName) {
+        String sql = String.format(
+                "CREATE TABLE IF NOT EXISTS %s(%s);",
+                tableName,
+                "id serial primary key"
+        );
+        try (Statement statement = connection.createStatement()) {
+            statement.executeUpdate(sql);
+            System.out.println(getTableScheme(connection, tableName));
+        } catch (Exception e) {
+            LOG.error("An Exception occurred:", e);
+        }
     }
 
     /*
     удаляет таблицу по указанному имени;
      */
     public void dropTable(String tableName) {
+        String sql = String.format(
+                "DROP TABLE IF EXISTS %s;",
+                tableName
+        );
+        try (Statement statement = connection.createStatement()) {
+            statement.executeUpdate(sql);
+        } catch (SQLException e) {
+            LOG.error("An SQLException occurred:", e);
+        }
     }
 
     /*
     добавляет столбец в таблицу;
      */
     public void addColumn(String tableName, String columnName, String type) {
+        String sql = String.format(
+                "ALTER TABLE %s ADD COLUMN %S %s;",
+                tableName,
+                columnName,
+                type
+        );
+        try (Statement statement = connection.createStatement()) {
+            statement.executeUpdate(sql);
+            System.out.println(getTableScheme(connection, tableName));
+        } catch (Exception e) {
+            LOG.error("An Exception occurred:", e);
+        }
     }
 
     /*
     удаляет столбец из таблицы;
      */
     public void dropColumn(String tableName, String columnName) {
+        String sql = String.format(
+                "ALTER TABLE %s DROP COLUMN %S;",
+                tableName,
+                columnName
+        );
+        try (Statement statement = connection.createStatement()) {
+            statement.executeUpdate(sql);
+            System.out.println(getTableScheme(connection, tableName));
+        } catch (Exception e) {
+            LOG.error("An Exception occurred:", e);
+        }
     }
 
     /*
     переименовывает столбец.
      */
     public void renameColumn(String tableName, String columnName, String newColumnName) {
+        String sql = String.format(
+                "ALTER TABLE %s RENAME COLUMN %S TO %s;",
+                tableName,
+                columnName,
+                newColumnName
+        );
+        try (Statement statement = connection.createStatement()) {
+            statement.executeUpdate(sql);
+            System.out.println(getTableScheme(connection, tableName));
+        } catch (Exception e) {
+            LOG.error("An Exception occurred:", e);
+        }
     }
 
-
-    public String getTableScheme(String tableName) throws Exception {
+    public String getTableScheme(Connection connection, String tableName) throws Exception {
         var rowSeparator = "-".repeat(30).concat(System.lineSeparator());
         var header = String.format("%-15s|%-15s%n", "NAME", "TYPE");
         var buffer = new StringJoiner(rowSeparator, rowSeparator, rowSeparator);
@@ -80,8 +144,26 @@ public class TableEditor implements AutoCloseable {
         }
     }
 
-    //TODO
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
+        Properties config = new Properties();
+        try (InputStream in = TableEditor.class.getClassLoader().getResourceAsStream("app.properties")) {
+            config.load(in);
+        } catch (IOException e) {
+            LOG.error("An IOException occurred:", e);
+        }
 
+        try (TableEditor tableEditor = new TableEditor(config)) {
+            tableEditor.createTable("TableEditor_tableName");
+            tableEditor.dropTable("TableEditor_tableName");
+            tableEditor.createTable("TableEditor_tableName");
+            tableEditor.addColumn("TableEditor_tableName", "Test_columnName", "text");
+            tableEditor.addColumn("TableEditor_tableName", "Test_columnName1", "text");
+            tableEditor.addColumn("TableEditor_tableName", "Test_columnName2", "text");
+            tableEditor.dropColumn("TableEditor_tableName", "Test_columnName");
+            tableEditor.renameColumn("TableEditor_tableName", "Test_columnName2", "Brand_new_name");
+        } catch (SQLException e) {
+            System.out.println("Возникла какая-то проблема в процессе работы с БД");
+            LOG.error("An SQLException occurred:", e);
+        }
     }
 }
