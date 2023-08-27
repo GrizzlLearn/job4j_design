@@ -33,6 +33,35 @@ public class TableEditor implements AutoCloseable {
         }
     }
 
+    private String execute(String sql, String tableName) {
+        String result = "";
+        int executeresult = 0;
+        try (Statement statement = connection.createStatement()) {
+            executeresult = statement.executeUpdate(sql);
+            if (executeresult == 0 && sql.startsWith("CREATE TABLE")) {
+                result = "Table is created!";
+            }
+            if (executeresult == 0 && sql.startsWith("DROP TABLE")) {
+                result = "Table is dropped!";
+            }
+            if (executeresult == 0 && sql.contains("ADD COLUMN")) {
+                result = "Column is added!";
+            }
+            if (executeresult == 0 && sql.contains("DROP COLUMN")) {
+                result = "Column is dropped!";
+            }
+            if (executeresult == 0 && sql.contains("RENAME COLUMN")) {
+                result = "Column is renamed!";
+            }
+            if (!sql.contains("DROP TABLE")) {
+                System.out.println(getTableScheme(connection, tableName));
+            }
+        } catch (Exception e) {
+            LOG.error("An Exception occurred:", e);
+        }
+        return result;
+    }
+
     /*
     создает пустую таблицу без столбцов с указанным именем;
      */
@@ -42,12 +71,7 @@ public class TableEditor implements AutoCloseable {
                 tableName,
                 "id serial primary key"
         );
-        try (Statement statement = connection.createStatement()) {
-            statement.executeUpdate(sql);
-            System.out.println(getTableScheme(connection, tableName));
-        } catch (Exception e) {
-            LOG.error("An Exception occurred:", e);
-        }
+        System.out.println(execute(sql, tableName));
     }
 
     /*
@@ -58,11 +82,7 @@ public class TableEditor implements AutoCloseable {
                 "DROP TABLE IF EXISTS %s;",
                 tableName
         );
-        try (Statement statement = connection.createStatement()) {
-            statement.executeUpdate(sql);
-        } catch (SQLException e) {
-            LOG.error("An SQLException occurred:", e);
-        }
+        System.out.println(execute(sql, tableName));
     }
 
     /*
@@ -75,12 +95,7 @@ public class TableEditor implements AutoCloseable {
                 columnName,
                 type
         );
-        try (Statement statement = connection.createStatement()) {
-            statement.executeUpdate(sql);
-            System.out.println(getTableScheme(connection, tableName));
-        } catch (Exception e) {
-            LOG.error("An Exception occurred:", e);
-        }
+        System.out.println(execute(sql, tableName));
     }
 
     /*
@@ -92,12 +107,7 @@ public class TableEditor implements AutoCloseable {
                 tableName,
                 columnName
         );
-        try (Statement statement = connection.createStatement()) {
-            statement.executeUpdate(sql);
-            System.out.println(getTableScheme(connection, tableName));
-        } catch (Exception e) {
-            LOG.error("An Exception occurred:", e);
-        }
+        System.out.println(execute(sql, tableName));
     }
 
     /*
@@ -110,12 +120,7 @@ public class TableEditor implements AutoCloseable {
                 columnName,
                 newColumnName
         );
-        try (Statement statement = connection.createStatement()) {
-            statement.executeUpdate(sql);
-            System.out.println(getTableScheme(connection, tableName));
-        } catch (Exception e) {
-            LOG.error("An Exception occurred:", e);
-        }
+        System.out.println(execute(sql, tableName));
     }
 
     public String getTableScheme(Connection connection, String tableName) throws Exception {
