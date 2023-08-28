@@ -23,29 +23,39 @@ public class ImportDB {
      * @throws SQLException Если происходит ошибка при создании базы данных или таблицы.
      */
     static private void prepareDB(String dbName, String tableName) throws ClassNotFoundException, SQLException {
-        String createDB = String.format("CREATE DATABASE IF NOT EXISTS %s;",
+        String createDB = String.format("CREATE DATABASE %s;",
                 dbName
         );
         String createTable = String.format("CREATE TABLE IF NOT EXISTS %s(%s, %s, %s);",
                 tableName,
                 "id serial primary key",
-                "username VARCHAR(255)",
-                "email VARCHAR(255)"
+                "username VARCHAR(255) NOT NULL",
+                "email VARCHAR(255) NOT NULL"
                 );
         List<String> sqlList = new ArrayList<>() {{
             add(createDB);
             add(createTable);
         }};
-        Class.forName(cfg.getProperty("jdbc.driver"));
         try (Connection connection = getConnection(cfg)) {
             for (String st : sqlList) {
                 try (Statement s = connection.createStatement()) {
-                   s.execute(st);
+                    if (st.startsWith("CREATE DATABASE")) {
+                        if (!checkDatabaseExists(s, dbName)) {
+                            s.execute(st);
+                        }
+                    } else {
+                        s.execute(st);
+                    }
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
             }
         }
+    }
+
+    private static boolean checkDatabaseExists(Statement statement, String dbName) throws SQLException {
+        String query = "SELECT datname FROM pg_database WHERE datname = '" + dbName + "'";
+        return statement.executeQuery(query).next();
     }
 
     /**
@@ -80,7 +90,7 @@ public class ImportDB {
         try (BufferedReader rd = new BufferedReader(new FileReader(dump))) {
             rd.lines().forEach( line -> {
                         String[] tmp = line.split(";");
-                        if (tmp.length > 1) {
+                        if (tmp.length > 1 && tmp[0].length() > 0 && tmp[1].length() > 0) {
                             users.add(new User(tmp[0], tmp[1]));
                         } else {
                             throw new IllegalArgumentException();
@@ -99,7 +109,7 @@ public class ImportDB {
      * @throws SQLException Если происходит ошибка при сохранении данных в таблицу.
      */
     public void save(List<User> users, String tableName) throws ClassNotFoundException, SQLException {
-        String sql = String.format("INSERT INTO %s value(?, ?)",
+        String sql = String.format("INSERT INTO %s(username, email) VALUES(?, ?)",
                 tableName
         );
         try (Connection connection = getConnection(cfg)) {
@@ -108,6 +118,8 @@ public class ImportDB {
                     ps.setString(1, user.name);
                     ps.setString(2, user.email);
                     ps.execute();
+                } catch (SQLException e) {
+                    e.printStackTrace();
                 }
             }
         }
@@ -132,6 +144,7 @@ public class ImportDB {
             cfg.load(in);
         }
         ImportDB db = new ImportDB(cfg, "./src/main/java/ru/job4j/spammer/dump.txt");
+        prepareDB(dbName, tableName);
         db.save(db.load(), tableName);
     }
 }
