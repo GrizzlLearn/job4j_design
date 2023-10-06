@@ -1,105 +1,160 @@
 #### 1. Что такое SQL?
 
 [2.3.1. Create Update Insert 0. Что такое база данных.](https://job4j.ru/profile/exercise/51/task-view/335)
-
 [SQL wiki](https://ru.wikipedia.org/wiki/SQL)
+[[0. Что такое база данных. (6860)#SQL]]
+
+SQL - это декларативный язык программирования, который используется для создания, модификации и управления данными в реляционной БД, управляемой системой управления базами данных (СУБД). С помощью SQL-запросов можно добавлять, изменять, получать или удалять данные из БД.
 
 
+---
+---
 
 #### 2. Что такое DML и DDL?
 
 [2.3.1. Create Update Insert 0. Что такое база данных.](https://job4j.ru/profile/exercise/51/task-view/335)
+[Учебник по языку SQL (DDL, DML) на примере диалекта MS SQL Server. Часть первая](https://habr.com/ru/post/255361/) (Раздел "О чем этот учебник")
+[[0. Что такое база данных. (6860)#Операции]]
 
-[Учебник по языку SQL (DDL, DML) на примере диалекта MS SQL Server. Часть первая](https://habr.com/ru/post/255361/) (Раздел "О чем этот учебник")
+DDL – Data Definition Language, характеризует операции над структурой данных.
+созданиt, удалениt, изменениt и т.д. таблиц и баз данных.
 
+DML – Data Manipulation Language, представляет операции над самими данными.
+создание, удаление, получение, обновление самих данных.
 
-
+---
+---
 #### 3. Что такое первичный ключ?
 
 [2.3.1. Create Update Insert 0.1. Связи между таблицами](https://job4j.ru/profile/exercise/51/task-view/336)
-
 [Руководство по проектированию реляционных баз данных (4-6 часть из 15) [перевод]](https://habr.com/ru/post/193284/)
-
 [PRIMARY KEY PostgreSQL](https://postgrespro.ru/docs/postgresql/15/ddl-constraints#DDL-CONSTRAINTS-PRIMARY-KEYS)
+[[1. Связи между таблицами (373615)#БАЗА]]
 
+`Первичный ключ` (primary key) - это поле в таблице, однозначно идентифицирующее каждую строку (запись) в таблице БД. Первичный ключ должен содержать уникальные значения. Также не может содержать null. В таблице может быть только один первичный ключ. Ключ может состоять из одного и более полей.
 
+Так как в реляционных БД все таблицы почти всегда связаны друг с другом, первичные ключи используются для однозначной организации этой связи.
+
+---
+---
 #### 4. Что такое внешний ключ?
 
 [2.3.1. Create Update Insert 0.1. Связи между таблицами](https://job4j.ru/profile/exercise/51/task-view/336)
-
-[Связи между таблицами базы данных](https://habr.com/ru/post/488054/) (Раздел "3.1. Как организовываются связи")
-
+[Связи между таблицами базы данных](https://habr.com/ru/post/488054/) (Раздел "3.1. Как организовываются связи")
 [FOREIGN KEY PostgreSQL](https://postgrespro.ru/docs/postgresql/15/tutorial-fk)
+[[1. Связи между таблицами (373615)#many-to-one и one-to-many]]
 
+Внешний ключ — это атрибут или набор атрибутов, которые ссылаются на primary key или unique другой таблицы. Другими словами, это что-то вроде указателя на строку другой таблицы.
 
-
+---
+---
 #### 5. Какие виды связей между таблицами существуют и как они организуются?
 
 [2.3.1. Create Update Insert 0.1. Связи между таблицами](https://job4j.ru/profile/exercise/51/task-view/336)
-
 [Связи между таблицами базы данных](https://habr.com/ru/post/488054/)
 
+1) [[1. Связи между таблицами (373615)#many-to-one и one-to-many]]
 
+Множество записей в одной таблице может быть связано с одной записью в другой таблице.
 
+2) [[1. Связи между таблицами (373615)#many-to-many]]
+
+Связь между таблицами реализуется с помощью третьей таблицы, которая служит в качестве промежуточной связующей таблицы.
+Для реализации связи многие ко многим нам нужен некий посредник между двумя рассматриваемыми таблицами. Он должен хранить два внешних ключа, первый из которых ссылается на первую таблицу, а второй — на вторую.
+
+3) [[1. Связи между таблицами (373615)#one-to-one]]
+
+Каждая запись в одной таблице соответствует только одной записи в другой таблице, и наоборот. Это означает, что между двумя таблицами существует уникальная пара записей, и нет дубликатов в связанных данных.
+
+---
+---
 #### 6. Опишите как вставить, удалить, обновить данные в(из) таблицу(ы).
 
 [2.3.1. Create Update Insert 0. Что такое база данных.](https://job4j.ru/profile/exercise/51/task-view/335)
 
-[Памятка/шпаргалка по SQL](https://habr.com/ru/post/564390/) (Разделы "Команды SQL" и "Синтаксис SQL")
-
+[Памятка/шпаргалка по SQL](https://habr.com/ru/post/564390/) (Разделы "Команды SQL" и "Синтаксис SQL")
 [INSERT PostgreSQL](https://postgrespro.ru/docs/postgresql/15/sql-insert)
-
 [DELETE PostgreSQL](https://postgrespro.ru/docs/postgresql/15/sql-delete)
-
 [UPDATE PostgreSQL](https://postgrespro.ru/docs/postgresql/15/sql-update?lang=ru)
 
+1) INSERT [[0. Что такое база данных. (6860)#Вставка данных]]
 
+```sql
+insert into имя_таблицы(имя_атр1, имя_атрN) values(значение_атр1, значение_атрN);
+```
 
+2) UPDATE [[0. Что такое база данных. (6860)#Обновление данных]]
+
+```sql
+update имя_таблицы set имя_атр1 = зн_атр1, имя_атрN = зн_атрN;
+```
+
+3) DELETE [[0. Что такое база данных. (6860)#Удаление данных]]
+
+```sql
+delete from имя_таблицы;
+```
+
+---
+---
 #### 7. Что такое нормализация БД?
 
 [2.3.4. Объекты Базы данных 7. Нормализация БД](https://job4j.ru/profile/exercise/179/task-view/819)
-
 [Нормализация отношений. Шесть нормальных форм](https://habr.com/ru/post/254773/)
 
+[[7. Нормализация БД (504822)#Первая нормальная форма]]
+
+Отношение находится в 1НФ, если все его атрибуты являются простыми, все используемые домены должны содержать только скалярные значения. Не должно быть повторений строк в таблице
+
+[[7. Нормализация БД (504822)#Вторая нормальная форма]]
 
 
+[[7. Нормализация БД (504822)#Третья нормальная форма]]
+[[7. Нормализация БД (504822)#Нормальная форма Бойса-Кодда]]
+
+
+---
+---
 #### 8. Что такое денормализация БД? Для чего она нужна?
 
 [2.3.4. Объекты Базы данных 8. Денормализация БД](https://job4j.ru/profile/exercise/179/task-view/820)
-
 [Зачем нужна денормализация баз данных, и когда ее использовать](https://habr.com/ru/company/latera/blog/281262/)
 
 
-
+---
+---
 #### 9. Что такое кластерный и некластерный индексы?
 
 [2.3.4. Объекты Базы данных 6. Индексы в SQL (кластерные и некластерные)](https://job4j.ru/profile/exercise/179/task-view/818)
-
-[Кластерные и «обычные» индексы MySQL (InnoDB)](https://habr.com/ru/post/141767/) (Разделы "Кластерные индексы" и "Некластерные индексы")
-
+[Кластерные и «обычные» индексы MySQL (InnoDB)](https://habr.com/ru/post/141767/) (Разделы "Кластерные индексы" и "Некластерные индексы")
 [Индекс PostgreSQL](https://postgrespro.ru/docs/postgresql/15/indexes)
 
+[[6. Индексы в SQL (кластерные и некластерные) (504821)]]
 
+1. **Кластерный индекс (Clustered Index)**:
+
+    - Кластерный индекс определяет физический порядок данных в таблице. Таблица может иметь только один кластерный индекс, так как данные в таблице фактически упорядочиваются по ключевым значениям этого индекса.
+    - Кластерный индекс обычно используется для колонки или набора колонок, которые являются первичным ключом таблицы. Он оптимизирует операции выборки данных по значению первичного ключа, так как данные фактически хранятся в том же порядке, что и ключи.
+    - Так как таблица может иметь только один кластерный индекс, выбор правильной колонки для него - важное решение в проектировании базы данных.
+2. **Некластерный индекс (Non-clustered Index)**:
+
+    - Некластерный индекс не определяет физический порядок данных в таблице. Вместо этого он создает отдельную структуру данных, которая содержит ссылки на строки таблицы и значения ключевых столбцов.
+    - Таблица может иметь несколько некластерных индексов, и они могут использоваться для оптимизации разных типов запросов. Например, индекс можно создать для ускорения выборки данных по определенному столбцу или для оптимизации соединений между таблицами.
+    - Некластерные индексы обычно занимают больше места, чем кластерные индексы, так как они хранят как значения ключей, так и ссылки на строки.
 
 #### 10. Какие типы соединений (join) таблиц существуют? В чем их разница?
 
 [2.3.2. Query 1. Inner join](https://job4j.ru/profile/exercise/52/task-view/339)
-
 [2.3.3. Outer join 0. Join](https://job4j.ru/profile/exercise/53/task-view/342)
-
-[Учебник по языку SQL (DDL, DML) на примере диалекта MS SQL Server. Часть четвертая](https://habr.com/ru/post/256045/) (Раздел "Join-соединения")
-
+[Учебник по языку SQL (DDL, DML) на примере диалекта MS SQL Server. Часть четвертая](https://habr.com/ru/post/256045/) (Раздел "Join-соединения")
 [JOIN PostgreSQL](https://postgrespro.ru/docs/postgresql/15/tutorial-join)
-
-[SQL запросы быстро. Часть 1](https://habr.com/ru/post/480838/) (Раздел "Join")
+[SQL запросы быстро. Часть 1](https://habr.com/ru/post/480838/) (Раздел "Join")
 
 
 #### 11. Что такое SQL курсор?
 
 [2.3.4. Объекты Базы данных 5. Курсор в SQL](https://job4j.ru/profile/exercise/179/task-view/811)
-
 [Курсоры в Mysql.](https://habr.com/ru/post/46333/)
-
 [Курсор PostgreSQL](https://postgrespro.ru/docs/postgresql/15/plpgsql-cursors)
 
 
@@ -107,9 +162,7 @@
 #### 12. Опишите шаги по созданию и использованию курсора.
 
 [2.3.4. Объекты Базы данных 5. Курсор в SQL](https://job4j.ru/profile/exercise/179/task-view/811)
-
 [Курсоры в Mysql.](https://habr.com/ru/post/46333/)
-
 [Курсор PostgreSQL](https://postgrespro.ru/docs/postgresql/15/plpgsql-cursors?lang=ru)
 
 
@@ -117,9 +170,7 @@
 #### 13. Что такое транзакция?
 
 [2.3.4. Объекты Базы данных 4.1. Транзакции. Общие сведения.](https://job4j.ru/profile/exercise/179/task-view/800)
-
 [Что такое транзакция](https://habr.com/ru/post/537594/)
-
 [Транзакция PostgreSQL](https://postgrespro.ru/docs/postgresql/15/tutorial-transactions?lang=ru)
 
 
@@ -127,7 +178,6 @@
 #### 14. Что такое триггер? Какие типы триггеров Вы знаете?
 
 [2.3.4. Объекты Базы данных 2. Триггеры](https://job4j.ru/profile/exercise/179/task-view/798)
-
 [TRIGGER PostgreSQL](https://www.postgresql.org/docs/current/sql-createtrigger.html)
 
 
@@ -135,24 +185,17 @@
 #### 15. В чем разница между where и having?
 
 [2.3.2. Query 0. Select](https://job4j.ru/profile/exercise/52/task-view/338)
-
 [2.3.2. Query 2. Группировка и агрегатные функции](https://job4j.ru/profile/exercise/52/task-view/340)
-
-[WHERE PostgreSQL](https://postgrespro.ru/docs/postgresql/15/queries-table-expressions#QUERIES-WHERE) 
-
+[WHERE PostgreSQL](https://postgrespro.ru/docs/postgresql/15/queries-table-expressions#QUERIES-WHERE)
 [HAVING PostgreSQL](https://postgrespro.ru/docs/postgresql/15/queries-table-expressions#QUERIES-GROUP)
-
-[SQL запросы быстро. Часть 1](https://habr.com/ru/post/480838/) (Разделы "Where" и "Having")
+[SQL запросы быстро. Часть 1](https://habr.com/ru/post/480838/) (Разделы "Where" и "Having")
 
 
 #### 16. Что такое подзапрос (sub-query)?
 
-[Как думать на SQL?](https://habr.com/ru/post/305926/) (Раздел "Подзапросы")
-
-[Подзапросы PostgreSQL](https://postgrespro.ru/docs/postgresql/15/queries-table-expressions#queries-subqueries) (Раздел "7.2.1.3 Подзапросы")
-
+[Как думать на SQL?](https://habr.com/ru/post/305926/) (Раздел "Подзапросы")
+[Подзапросы PostgreSQL](https://postgrespro.ru/docs/postgresql/15/queries-table-expressions#queries-subqueries) (Раздел "7.2.1.3 Подзапросы")
 [Скалярные подзапросы PostgreSQL](https://postgrespro.ru/docs/postgresql/15/sql-expressions#SQL-SYNTAX-SCALAR-SUBQUERIES)
-
 [Выражения подзапросов PostgreSQL](https://postgrespro.ru/docs/postgresql/15/functions-subquery)
 
 
@@ -164,9 +207,7 @@
 #### 18. Что такое group by?
 
 [2.3.2. Query 2. Группировка и агрегатные функции](https://job4j.ru/profile/exercise/52/task-view/340)
-
-[SQL запросы быстро. Часть 1](https://habr.com/ru/post/480838/) (Раздел "Group by")
-
+[SQL запросы быстро. Часть 1](https://habr.com/ru/post/480838/) (Раздел "Group by")
 [GROUP BY PostgreSQL](https://postgrespro.ru/docs/postgresql/15/queries-table-expressions#QUERIES-GROUP)
 
 
@@ -174,7 +215,6 @@
 #### 19. Что такое хранимые процедуры?
 
 [2.3.4. Объекты Базы данных 3. Хранимые процедуры и функции](https://job4j.ru/profile/exercise/179/task-view/799)
-
 [Хранимые процедуры PostgreSQL](https://postgrespro.ru/docs/postgresql/15/sql-createprocedure)
 
 
@@ -182,87 +222,152 @@
 #### 20. Что такое view (Представление)?
 
 [2.3.4. Объекты Базы данных 1. Представления](https://job4j.ru/profile/exercise/179/task-view/787)
-
 [Представления (VIEW) в MySQL](https://habr.com/ru/post/47031/)
-
 [Представления PostgreSQL](https://postgrespro.ru/docs/postgresql/15/tutorial-views)
 
 
-
-#### 21. Что такое JDBC?
+---
+---
+#### 21. Что такое JDBC?
 
 [2.3.5. JDBC 0. JDBC](https://job4j.ru/profile/exercise/55/task-view/344)
-
 [Простой пример JDBC для начинающих](https://habr.com/ru/post/326614/)
-
 [Документация JDBC Введение](https://docs.oracle.com/javase/tutorial/jdbc/overview/index.html)
 
-####
-#### . Что нужно для работы с той или иной БД?
+[[0. JDBC (6863)]]
+
+JDBC. _JDBC_ – это API, т.е. набор вспомогательных классов, которое позволяет работать с базами данных. Причем JDBC предоставляет единый интерфейс для работы с ними, ведь бывают различные базы данных.
+
+---
+---
+#### 22. Что нужно для работы с той или иной БД?
 
 [2.3.5. JDBC 0. JDBC](https://job4j.ru/profile/exercise/55/task-view/344)
+[[0. JDBC (6863)]]
 
-        
+Нужен драйвер, а так же:
+ 1) добавить необходимый драйвер в pom.xml в `dependency`
+ 2) подключиться к БД
+
+---
+---
 #### 23. Как зарегистрировать драйвер?
 
 [2.3.5. JDBC 0. JDBC](https://job4j.ru/profile/exercise/55/task-view/344)
 
+```java
+Class.forName(cfg.getProperty("jdbc.driver"));
+```
 
-#### 24. Как получить Connection?
+
+---
+---
+#### 24. Как получить Connection?
 
 [2.3.5. JDBC 0. JDBC](https://job4j.ru/profile/exercise/55/task-view/344)
 
+```java
+Connection cnn = DriverManager.getConnection(
+         cfg.getProperty("url"),
+         cfg.getProperty("username"),
+         cfg.getProperty("password")
+);
+```
 
-#### 25.Что такое Statement, PreparedStatement? В чем разница между ними?
+---
+---
+#### 25.Что такое Statement, PreparedStatement? В чем разница между ними?
 
 [2.3.5. JDBC 0.1. Statement](https://job4j.ru/profile/exercise/55/task-view/345)
-
-[2.3.5. JDBC 0.2. PreparedStatement](https://job4j.ru/profile/exercise/55/task-view/346)
-
-[Пакетная обработка в JDBC и HIBERNATE](https://habr.com/ru/post/501756/) (Разделы "Интерфейс Statement" и "Интерфейс PreparedStatement")
-
+[2.3.5. JDBC 0.2. PreparedStatement](https://job4j.ru/profile/exercise/55/task-view/346
+[Пакетная обработка в JDBC и HIBERNATE](https://habr.com/ru/post/501756/) (Разделы "Интерфейс Statement" и "Интерфейс PreparedStatement")
 [Документация Statement](https://docs.oracle.com/en/java/javase/17/docs/api/java.sql/java/sql/Statement.html)
-
 [Документация PreparedStatement](https://docs.oracle.com/en/java/javase/17/docs/api/java.sql/java/sql/PreparedStatement.html)
 
+[[Statement]]
+[[PreparedStatement]]
 
+`Statement` - это интерфейс в Java, который используется для выполнения SQL-запросов к базе данных.
 
-#### 26. Что такое ResultSet?
+`PreparedStatement` - это интерфейс в Java, предоставляющий способ выполнять предварительно скомпилированные SQL-запросы с параметрами. Он представляет собой механизм, который помогает защитить ваш код от SQL-инъекций и может улучшить производительность, так как база данных может повторно использовать предварительно скомпилированный запрос.
+
+PreparedStatement поддерживает параметризированные запросы, позволяет избежать SQL-инъекций
+
+---
+---
+#### 26. Что такое ResultSet?
 
 [2.3.5. JDBC 0.1. Statement](https://job4j.ru/profile/exercise/55/task-view/345)
-
 [2.3.5. JDBC 0.2. PreparedStatement](https://job4j.ru/profile/exercise/55/task-view/346)
-
 [Документация ResultSet](https://docs.oracle.com/en/java/javase/17/docs/api/java.sql/java/sql/ResultSet.html)
 
+[[projects/01 - Java/Интерфейсы/ResultSet|ResultSet]]
 
-#### 27. В чем разница между методами execute, executeUpdate, executeQuery?
+`ResultSet` - это интерфейс в Java, который представляет собой результат выполнения SQL-запроса к базе данных. Он используется для хранения и обработки набора результатов, полученных из базы данных после выполнения SQL-запроса SELECT. `ResultSet` представляет собой таблицу данных с результатами запроса, и он позволяет вам извлекать, перебирать и манипулировать данными, полученными из базы данных.
 
-[2.3.5. JDBC 0.1. Statement](https://job4j.ru/profile/exercise/55/task-view/345)
-
-[2.3.5. JDBC 0.2. PreparedStatement](https://job4j.ru/profile/exercise/55/task-view/346)
-
-[Документация Statement](https://docs.oracle.com/en/java/javase/17/docs/api/java.sql/java/sql/Statement.html#method-summary) (содержит все 3 метода)
-
-[Документация PreparedStatement](https://docs.oracle.com/en/java/javase/17/docs/api/java.sql/java/sql/PreparedStatement.html#method-summary) (содержит все 3 метода)
-
-
-#### 28. Можно ли использовать возвращаемое значение execute() для проверки, что что-то обновилось?
+---
+---
+#### 27. В чем разница между методами execute, executeUpdate, executeQuery?
 
 [2.3.5. JDBC 0.1. Statement](https://job4j.ru/profile/exercise/55/task-view/345)
-
 [2.3.5. JDBC 0.2. PreparedStatement](https://job4j.ru/profile/exercise/55/task-view/346)
+[Документация Statement](https://docs.oracle.com/en/java/javase/17/docs/api/java.sql/java/sql/Statement.html#method-summary) (содержит все 3 метода)
+[Документация PreparedStatement](https://docs.oracle.com/en/java/javase/17/docs/api/java.sql/java/sql/PreparedStatement.html#method-summary) (содержит все 3 метода)
+
+1. **execute()**:
+    - Этот метод может использоваться для выполнения любого SQL-запроса, включая SELECT, INSERT, UPDATE, DELETE и другие.
+    - Возвращает `true`, если был получен результат, который представляет собой `ResultSet`, и `false`, если результатом является обновление (как INSERT, UPDATE, DELETE) или нет результата вовсе.
+    - Позволяет выполнять любые типы SQL-запросов, но требует более сложного кода для обработки результата.
+
+2. **executeUpdate()**:
+    - Этот метод предназначен для выполнения SQL-команд, которые изменяют данные в базе данных, такие как INSERT, UPDATE и DELETE.
+    - Возвращает количество строк, затронутых выполненной командой. Если команда не изменяет данные (например, SELECT), метод возвращает 0.
+    - Чаще всего используется при выполнении SQL-команд для вставки, обновления и удаления данных.
+
+3. **executeQuery()**:
+    - Этот метод используется исключительно для выполнения SQL-запросов SELECT, которые возвращают набор результатов (ResultSet).
+    - Возвращает `ResultSet`, который представляет собой результаты запроса, и который можно использовать для извлечения данных из базы данных.
 
 
-#### 29. Как получить при вставке сгенерированные ключи? Как это сделать на чистом sql?
+Разница между этими методами заключается в типах выполняемых операций и типах возвращаемых результатов. `execute()` может использоваться для всех видов операций, `executeUpdate()` для изменения данных, а `executeQuery()` исключительно для выполнения SELECT-запросов.
 
-[2.3.5. JDBC 0.2. PreparedStatement](https://job4j.ru/profile/exercise/55/task-view/346)
-
-
-#### 30. Для чего используется конструкция try-with-resources?
+---
+---
+#### 28. Можно ли использовать возвращаемое значение execute() для проверки, что что-то обновилось?
 
 [2.3.5. JDBC 0.1. Statement](https://job4j.ru/profile/exercise/55/task-view/345)
-
 [2.3.5. JDBC 0.2. PreparedStatement](https://job4j.ru/profile/exercise/55/task-view/346)
 
-[9 лучших практик для обработки исключений в Java](https://habr.com/ru/post/551992/) (Пункт 1)
+Не совсем понимаю что именно является ответом:
+1) использовать напрямую нельзя, т.к. при обновлении возвращяет `false` и всё.
+2) не напрямую - можно, т.к. можно вызвать `st.getUpdateCount()`
+```java
+st.execute(sql);
+int count = st.getUpdateCount();
+```
+
+---
+---
+#### 29. Как получить при вставке сгенерированные ключи? Как это сделать на чистом sql?
+
+[2.3.5. JDBC 0.2. PreparedStatement](https://job4j.ru/profile/exercise/55/task-view/346)
+[[PreparedStatement]]
+
+```java
+try (PreparedStatement ps =
+con.prepareStatement("INSERT ...", Statement.RETURN_GENERATED_KEYS)) {
+	try (ResultSet generatedKeys = ps.getGeneratedKeys()) {}
+}
+```
+
+---
+---
+#### 30. Для чего используется конструкция try-with-resources?
+
+[2.3.5. JDBC 0.1. Statement](https://job4j.ru/profile/exercise/55/task-view/345)
+[2.3.5. JDBC 0.2. PreparedStatement](https://job4j.ru/profile/exercise/55/task-view/346)
+[9 лучших практик для обработки исключений в Java](https://habr.com/ru/post/551992/) (Пункт 1)
+
+Если ресурс реализует интерфейс [[AutoClosable]]
+
+Используется для автоматического закрытия соединения с БД в случае если в блоке try возникнет исключение (Exception)
