@@ -14,6 +14,7 @@ public class Menu {
     public static final String COUNT = "Выберите количество создаваемых постов";
     public static final String TEXT_OF_POST = "Введите текст";
     public static final String EXIT = "Конец работы";
+    public static final String FOR_DELETE = "Все посты удалены";
 
     public static final String MENU = """
                 Введите 1 для создание поста.
@@ -56,7 +57,7 @@ public class Menu {
             } else if (SHOW_ALL_POSTS == userChoice) {
                 System.out.println(PostStore.getPosts());
             } else if (DELETE_POST == userChoice) {
-                System.out.println(ID_FOR_DELETE);
+                System.out.println(FOR_DELETE);
                 postStore.removeAll();
             } else {
                 run = false;
