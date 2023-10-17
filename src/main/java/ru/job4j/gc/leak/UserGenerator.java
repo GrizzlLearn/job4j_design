@@ -50,7 +50,7 @@ public class UserGenerator implements Generate {
         return users.get(random.nextInt(users.size()));
     }
 
-    public static List<User> getUsers() {
+    public List<User> getUsers() {
         return users;
     }
 }

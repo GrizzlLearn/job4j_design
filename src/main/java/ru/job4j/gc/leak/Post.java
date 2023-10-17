@@ -49,4 +49,31 @@ public class Post {
     protected void finalize() throws Throwable {
         super.finalize();
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Post post)) {
+            return false;
+        }
+
+        if (!id.equals(post.id)) {
+            return false;
+        }
+        if (!text.equals(post.text)) {
+            return false;
+        }
+
+        return comments.equals(post.comments);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id.hashCode();
+        result = 31 * result + text.hashCode();
+        result = 31 * result + comments.hashCode();
+        return result;
+    }
 }
