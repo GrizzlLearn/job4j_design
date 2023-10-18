@@ -4,13 +4,13 @@ import java.util.List;
 
 public class Post {
 
-    private Integer id;
+    private int id;
 
     private String text;
 
     private List<Comment> comments;
 
-    public Post(Integer id, String text, List<Comment> comments) {
+    public Post(int id, String text, List<Comment> comments) {
         this.id = id;
         this.text = text;
         this.comments = comments;
@@ -21,11 +21,11 @@ public class Post {
         this.comments = comments;
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -46,11 +46,6 @@ public class Post {
     }
 
     @Override
-    protected void finalize() throws Throwable {
-        super.finalize();
-    }
-
-    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -59,19 +54,18 @@ public class Post {
             return false;
         }
 
-        if (!id.equals(post.id)) {
+        if (id != post.id) {
             return false;
         }
         if (!text.equals(post.text)) {
             return false;
         }
-
         return comments.equals(post.comments);
     }
 
     @Override
     public int hashCode() {
-        int result = id.hashCode();
+        int result = id;
         result = 31 * result + text.hashCode();
         result = 31 * result + comments.hashCode();
         return result;

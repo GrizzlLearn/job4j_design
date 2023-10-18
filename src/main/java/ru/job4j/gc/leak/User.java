@@ -32,9 +32,4 @@ public class User {
     public int hashCode() {
         return name.hashCode();
     }
-
-    @Override
-    protected void finalize() throws Throwable {
-        super.finalize();
-    }
 }
