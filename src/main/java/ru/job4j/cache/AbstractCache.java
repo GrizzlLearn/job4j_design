@@ -12,9 +12,10 @@ public abstract class AbstractCache<K, V> {
     /**
      * Метод добавляет в HashMap Элемент key - new SoftReference<V>(value)
      *
-     * @param key
-     * @param value
+     * @param key Название файла
+     * @param value Содержимое файла
      */
+
     public final void put(K key, V value) {
         cache.putIfAbsent(key, new SoftReference<V>(value));
     }
@@ -22,7 +23,7 @@ public abstract class AbstractCache<K, V> {
     /**
      * Метод позволяет получить значение из кэша по ключу key
      *
-     * @param key
+     * @param key Название файла
      * @return значение SoftReference<V>
      * @see SoftReference
      * @see Optional
