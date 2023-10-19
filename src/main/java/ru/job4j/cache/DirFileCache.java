@@ -15,7 +15,7 @@ public class DirFileCache extends AbstractCache<String, String> {
     }
 
     /**
-     * Принимает название файла, добавляет в карту как ключ, значением содержимое файла.
+     * Вызывает {@link #loadFile(String)}, возвращает содержимое файла из кэша
      *
      * @param key названия файла, который содержится в папке {@link #cachingDir}
      * @return Содержимое файла, указанного как параметр
@@ -24,16 +24,25 @@ public class DirFileCache extends AbstractCache<String, String> {
 
     @Override
     public String load(String key) {
-        Path filePath = Path.of(String.format("%s%s", cachingDir, key));
+        loadFile(key);
+        return get(key);
+    }
+
+    /**
+     * Принимает название файла, добавляет в карту как ключ, значением - содержимое файла.
+     *
+     * @param fileName Название файла
+     */
+
+    private void loadFile(String fileName) {
+        Path filePath = Path.of(String.format("%s%s", cachingDir, fileName));
         try {
             String fileContent = readFileContent(filePath);
             SoftReference<String> softReference = new SoftReference<>(fileContent);
-            put(key, softReference.get());
+            put(fileName, softReference.get());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
-        return get(key);
     }
 
     /**
