@@ -1,18 +1,20 @@
 package ru.job4j.cache.menu;
 
+import ru.job4j.cache.AbstractCache;
 import ru.job4j.cache.DirFileCache;
+import java.util.Scanner;
 
 public class Emulator {
-    private static final String PATH_TO_FILES = "/Users/dvl/projects/job4j_design/data/";
-
     public static void main(String[] args) {
-        init();
-    }
-
-    public static void init() {
-        DirFileCache dirFileCache = new DirFileCache(PATH_TO_FILES);
-        System.out.println(dirFileCache.load("Names.txt"));
-        System.out.println(System.lineSeparator());
-        System.out.println(dirFileCache.load("Address.txt"));
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Please input dir for caching ");
+        String dir = scanner.nextLine();
+        AbstractCache<String, String> dirFileCache = new DirFileCache(dir);
+        System.out.println("Please input filename for caching or Exit");
+        String file = scanner.nextLine();
+        while (!"Exit".equals(file)) {
+            System.out.println(dirFileCache.get(file));
+            file = scanner.nextLine();
+        }
     }
 }

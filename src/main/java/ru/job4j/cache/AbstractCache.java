@@ -21,20 +21,24 @@ public abstract class AbstractCache<K, V> {
     }
 
     /**
-     * Метод позволяет получить значение из кэша по ключу key
+     * Метод принимает название файла, добавляет запись в карту 'название файла - содержимое файла', возвращает содержимое файла.
      *
      * @param key Название файла
-     * @return значение SoftReference<V>
+     * @return значение SoftReference<V> содержимое файла
      * @see SoftReference
      * @see Optional
+     * @see DirFileCache#load(String)
      */
 
     public final V get(K key) {
         V result = null;
-        Optional<SoftReference<V>> refExist = Optional.ofNullable(cache.get(key));
-        if (refExist.isPresent()) {
-            result = refExist.get().get();
+        Optional<V> fileContentExits = Optional.ofNullable(load(key));
+
+        if (fileContentExits.isPresent()) {
+            put(key, fileContentExits.get());
+            result = cache.getOrDefault(key, new SoftReference<>(fileContentExits.get())).get();
         }
+
         return result;
     }
 
