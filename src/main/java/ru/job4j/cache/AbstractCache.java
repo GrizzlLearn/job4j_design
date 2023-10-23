@@ -17,7 +17,7 @@ public abstract class AbstractCache<K, V> {
      */
 
     public final void put(K key, V value) {
-        cache.putIfAbsent(key, new SoftReference<V>(value));
+        cache.put(key, new SoftReference<V>(value));
     }
 
     /**
@@ -31,15 +31,13 @@ public abstract class AbstractCache<K, V> {
      */
 
     public final V get(K key) {
-        V result = null;
-        Optional<V> fileContentExits = Optional.ofNullable(load(key));
-
-        if (fileContentExits.isPresent()) {
-            put(key, fileContentExits.get());
-            result = cache.getOrDefault(key, new SoftReference<>(fileContentExits.get())).get();
+        Optional<V> fileContentExits = Optional.empty();
+        if (cache.isEmpty() || !cache.containsKey(key)) {
+            fileContentExits = Optional.ofNullable(load(key));
+            fileContentExits.ifPresent(v -> put(key, v));
         }
 
-        return result;
+        return cache.get(key).get();
     }
 
     protected abstract V load(K key);
