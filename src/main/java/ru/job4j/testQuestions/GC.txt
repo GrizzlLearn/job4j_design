@@ -1,0 +1,171 @@
+#### 1. Чем Java отличается от C++?
+
+[2.4.1. Понятие сборщик мусора 0. Понятие сборки мусора](https://job4j.ru/profile/exercise/58/task-view/369)
+[Отличия между C++ /Visual Basic и Java на общем уровне (для начинающих и учащихся)](https://habr.com/ru/post/480112/)
+
+
+
+#### 2. Что такое менеджер памяти?
+
+[Менеджер памяти Wiki](https://ru.wikipedia.org/wiki/%D0%9C%D0%B5%D0%BD%D0%B5%D0%B4%D0%B6%D0%B5%D1%80_%D0%BF%D0%B0%D0%BC%D1%8F%D1%82%D0%B8)
+
+
+
+#### 3. Какой механизм используется в Java для управления памятью?
+
+[2.4.1. Понятие сборщик мусора 0. Понятие сборки мусора](https://job4j.ru/profile/exercise/58/task-view/369)
+[HotSpot Wiki](https://ru.wikipedia.org/wiki/HotSpot)
+[HotSpot Oracle](https://www.oracle.com/java/technologies/javase/javase-core-technologies-apis.html)
+
+
+
+#### 4. Опишите процесс работы сборщика мусора.
+
+[2.4.1. Понятие сборщик мусора 0. Понятие сборки мусора](https://job4j.ru/profile/exercise/58/task-view/369)
+[Избавляемся от мусора в Java](https://habr.com/ru/company/otus/blog/553996/)
+[Реализация GC](https://docs.oracle.com/en/java/javase/16/gctuning/garbage-collector-implementation.html)
+
+
+#### 5. Какие алгоритмы сборщика вы знаете?
+
+[2.4.2. Виды сборщиков мусора 0. Виды сборщиков мусора](https://job4j.ru/profile/exercise/59/task-view/371)
+[Избавляемся от мусора в Java](https://habr.com/ru/company/otus/blog/553996/)
+
+
+
+#### 6. Чем отличаются сборщики мусора?
+
+[2.4.2. Виды сборщиков мусора 0. Виды сборщиков мусора](https://job4j.ru/profile/exercise/59/task-view/371)
+[Избавляемся от мусора в Java](https://habr.com/ru/company/otus/blog/553996/)
+[Дюк, вынеси мусор! — 1. Введение](https://habr.com/ru/post/269621/)(Введение в сборщики и знакомство)
+[Дюк, вынеси мусор! — 2. Serial GC и Parallel GC](https://habr.com/ru/post/269707/)(Serial и Parallel)
+[Дюк, вынеси мусор! — 3. CMS и G1](https://habr.com/ru/post/269863/)(CMS и G1)
+[Дюк, вынеси мусор! — 4. ZGC](https://habr.com/ru/post/680038/)(ZGC)
+
+
+
+#### 7. Расскажите про утилиты для анализа памяти?
+
+[2.4.2. Виды сборщиков мусора 1. Эксперименты с различными GC](https://job4j.ru/profile/exercise/59/task-view/372)
+[2.4.3. Профилирование приложения 0. Инструменты анализа памяти](https://job4j.ru/profile/exercise/60/task-view/373)
+
+
+
+#### 8. Что такое ссылки?
+
+[2.4.4. Типы ссылок и коллекции на soft weak ссылках 0. Виды ссылок](https://job4j.ru/profile/exercise/61/task-view/375)
+[Управление памятью Java](https://habr.com/ru/post/549176/)
+
+
+
+#### 9. Какие типы ссылок Вы знаете?
+
+[2.4.4. Типы ссылок и коллекции на soft weak ссылках 0. Виды ссылок](https://job4j.ru/profile/exercise/61/task-view/375)
+[Управление памятью Java](https://habr.com/ru/post/549176/)
+[Мягкие ссылки на страже доступной памяти или как экономить память правильно](https://habr.com/ru/post/169883/)
+[Документация SoftReference](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/ref/SoftReference.html)
+[Документация WeakReference](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/ref/WeakReference.html)
+[Документация PhantomReference](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/ref/PhantomReference.html)
+
+
+
+#### 10. Чем эти ссылки отличаются?
+
+[2.4.4. Типы ссылок и коллекции на soft weak ссылках 0. Виды ссылок](https://job4j.ru/profile/exercise/61/task-view/375)
+[Управление памятью Java](https://habr.com/ru/post/549176/)
+[Мягкие ссылки на страже доступной памяти или как экономить память правильно](https://habr.com/ru/post/169883/)
+
+
+
+#### 11. Расскажите про String pool и Integer pool (Integer cache).
+
+[2.4.5. Java Memory Model 1. String pool, Integer pool](https://job4j.ru/profile/exercise/196/task-view/1011)
+[Java Challengers #2: Сравнение строк](https://habr.com/ru/company/otus/blog/428449/)(Раздел "Что такое пул строк")
+[Знаешь ли ты JAVA, %username%?](https://habr.com/ru/post/111189/)(Вопрос 4)
+
+
+
+#### 12. Расскажите о методе String.intern().
+
+[2.4.5. Java Memory Model 1. String pool, Integer pool](https://job4j.ru/profile/exercise/196/task-view/1011)
+[Все о String.intern()](https://habr.com/ru/post/79913/)
+[Документация String.intern()](https://docs.oracle.com/javase/9/docs/api/java/lang/String.html#intern--)
+
+
+
+#### 13. Расскажите, что такое профайлер.
+
+[2.4.3. Профилирование приложения 2. Профилировщик Visual VM](https://job4j.ru/profile/exercise/60/task-view/1014)
+[2.4.2. Виды сборщиков мусора 1. Эксперименты с различными GC](https://job4j.ru/profile/exercise/59/task-view/372)
+[2.4.3. Профилирование приложения 0. Инструменты анализа памяти](https://job4j.ru/profile/exercise/60/task-view/373)
+
+
+
+#### 14. Расскажите, как использовать VisualVM.
+
+[2.4.3. Профилирование приложения 2. Профилировщик Visual VM](https://job4j.ru/profile/exercise/60/task-view/1014)
+[2.4.2. Виды сборщиков мусора 1. Эксперименты с различными GC](https://job4j.ru/profile/exercise/59/task-view/372)
+[Документация VisualVM](https://docs.oracle.com/javase/8/docs/technotes/guides/visualvm/intro.html)(Введение в VisualVM)
+
+
+
+#### 15. Расскажите, чем отличается sampling от profiling? (Это типы аудита. Режим работы в профайлере)
+
+[2.4.3. Профилирование приложения 2. Профилировщик Visual VM](https://job4j.ru/profile/exercise/60/task-view/1014)
+[Difference between sampling and profiling in jVisualVM](https://stackoverflow.com/questions/12130107/difference-between-sampling-and-profiling-in-jvisualvm)(Stack overflow)
+
+
+
+#### 16. Расскажите о методе finalize().
+
+[2.4.1. Понятие сборщик мусора 0. Понятие сборки мусора](https://job4j.ru/profile/exercise/58/task-view/369)
+[Как я пытался понять смысл метода finalize](https://habr.com/ru/post/183344/)
+[Опасности метода finalize](https://habr.com/ru/post/130370/)
+Д. Блох. Effective Java.(Глава 2, раздел "2.8 Избегайте финализаторов и очистителей")
+
+
+#### 17. Расскажите о методе clone(). Что такое Deep clone and Shallow clone?
+
+[2.4.5. Java Memory Model 2. Клонирование объектов. Shallow clone и deep clone](https://job4j.ru/profile/exercise/196/task-view/1013)
+[Как правильно клонировать объект?](https://habr.com/ru/post/246993/)
+[Closures и полное копирование объекта](https://habr.com/ru/post/138594/)
+[Документация Object.clone()](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Object.html#clone())
+
+
+
+#### 18. Расскажите о Stack, Heap и Metaspace.
+
+[2.4.1. Понятие сборщик мусора 1. Stack, Heap, Metaspace](https://job4j.ru/profile/exercise/58/task-view/1012)
+[2.1.4. List 4. Используя контейнер на базе связанного списка создать контейнер Stack](https://job4j.ru/profile/exercise/4/task-view/283)
+[Управление памятью Java](https://habr.com/ru/post/549176/)(Разделы "Stack" и "Heap")
+
+
+
+#### 19. Что такое ClassLoader? Перечислите основные реализации ClassLoader.
+
+[2.4.5. Java Memory Model 3. Загрузка классов в JVM](https://job4j.ru/profile/exercise/196/task-view/1053)
+[Загрузка классов в Java. Теория](https://habr.com/ru/post/103830/)
+[Внутренности JVM, Часть 1 — Загрузчик классов](https://habr.com/ru/company/otus/blog/468193/)
+
+
+#### 20. Расскажите иерархию штатных загрузчиков классов в Java. Какой загрузчик находится в корне иерархии?
+
+[2.4.5. Java Memory Model 3. Загрузка классов в JVM](https://job4j.ru/profile/exercise/196/task-view/1053)
+[Загрузка классов в Java. Теория](https://habr.com/ru/post/103830/)
+[Внутренности JVM, Часть 1 — Загрузчик классов](https://habr.com/ru/company/otus/blog/468193/)
+
+
+
+#### 21. Какой загрузчик классов нельзя получить методом getClassLoader()? Почему?
+
+[2.4.5. Java Memory Model 3. Загрузка классов в JVM](https://job4j.ru/profile/exercise/196/task-view/1053)
+[Загрузка классов в Java. Теория](https://habr.com/ru/post/103830/)
+[Внутренности JVM, Часть 1 — Загрузчик классов](https://habr.com/ru/company/otus/blog/468193/)
+
+
+
+#### 22. Расскажите алгоритм поиска и загрузки класса в JVM.
+
+[2.4.5. Java Memory Model 3. Загрузка классов в JVM](https://job4j.ru/profile/exercise/196/task-view/1053)
+[Загрузка классов в Java. Теория](https://habr.com/ru/post/103830/)
+[Внутренности JVM, Часть 1 — Загрузчик классов](https://habr.com/ru/company/otus/blog/468193/)
