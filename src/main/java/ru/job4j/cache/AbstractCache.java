@@ -31,13 +31,26 @@ public abstract class AbstractCache<K, V> {
      */
 
     public final V get(K key) {
-        Optional<V> fileContentExits = Optional.empty();
-        if (cache.isEmpty() || !cache.containsKey(key)) {
-            fileContentExits = Optional.ofNullable(load(key));
-            fileContentExits.ifPresent(v -> put(key, v));
+        V result;
+        if (!cache.containsKey(key)) {
+            result = loadKey(key);
+        } else {
+            Optional<V> strongObjExists = Optional.ofNullable(cache.get(key).get());
+            result = strongObjExists.orElseGet(() -> loadKey(key));
         }
 
-        return cache.get(key).get();
+        return result;
+    }
+
+    private V loadKey(K key) {
+        V result = null;
+        Optional<V> fileContentExits = Optional.ofNullable(load(key));
+        if (fileContentExits.isPresent()) {
+            put(key, fileContentExits.get());
+            result = fileContentExits.get();
+        }
+
+        return result;
     }
 
     protected abstract V load(K key);
