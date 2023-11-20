@@ -8,33 +8,29 @@ public class FoolTest {
 
     @Test
     void test1() {
-        String text = "One";
-        String answer = "Two";
-        int startAt = 10;
-        assertThat(Fool.checkAnswer(text, answer, startAt)).isEqualTo(0);
+        String expected = "FizzBuzz";
+        int startAt = 15;
+        assertThat(Fool.getExpectedAnswer(startAt)).isEqualTo(expected);
     }
 
     @Test
     void test2() {
-        String text = "One";
-        String answer = "One";
-        int startAt = 10;
-        assertThat(Fool.checkAnswer(text, answer, startAt)).isEqualTo(10);
+        String expected = "Fizz";
+        int startAt = 3;
+        assertThat(Fool.getExpectedAnswer(startAt)).isEqualTo(expected);
     }
 
     @Test
     void test3() {
-        String text = "One";
-        String answer = null;
-        int startAt = 10;
-        assertThat(Fool.checkAnswer(text, answer, startAt)).isEqualTo(0);
+        String expected = "Buzz";
+        int startAt = 5;
+        assertThat(Fool.getExpectedAnswer(startAt)).isEqualTo(expected);
     }
 
     @Test
     void test4() {
-        String answer = "One";
-        String text = String.valueOf(answer);
-        int startAt = 10;
-        assertThat(Fool.checkAnswer(text, answer, startAt)).isEqualTo(10);
+        String expected = "7";
+        int startAt = 7;
+        assertThat(Fool.getExpectedAnswer(startAt)).isEqualTo(expected);
     }
 }

@@ -1,6 +1,5 @@
 package ru.job4j.kiss.fool;
 
-import java.util.Optional;
 import java.util.Scanner;
 
 public class Fool {
@@ -8,45 +7,45 @@ public class Fool {
     private static final String FIZZ_BUZZ = "FizzBuzz";
     private static final String FIZZ = "Fizz";
     private static final String BUZZ = "Buzz";
+    private static final int THREE = 3;
+    private static final int FIVE = 5;
 
     public static void main(String[] args) {
         System.out.println("Игра FizzBuzz.");
-        int startAt = 1;
-        Scanner io = new Scanner(System.in);
+        var startAt = 1;
+        var io = new Scanner(System.in);
 
         while (startAt < 100) {
-            if (startAt % 3 == 0 && startAt % 5 == 0) {
-                System.out.println("FizzBuzz");
-            } else if (startAt % 3 == 0) {
-                System.out.println("Fizz");
-            } else if (startAt % 5 == 0) {
-                System.out.println("Buzz");
+            if (startAt % THREE == 0 || startAt % FIVE == 0) {
+                System.out.println(getExpectedAnswer(startAt));
             } else {
                 System.out.println(startAt);
             }
+
             startAt++;
             String answer = io.nextLine();
-            if (startAt % 3 == 0 && startAt % 5 == 0) {
-                startAt = checkAnswer(FIZZ_BUZZ, answer, startAt);
-            } else if (startAt % 3 == 0) {
-                startAt = checkAnswer(FIZZ, answer, startAt);
-            } else if (startAt % 5 == 0) {
-                startAt = checkAnswer(BUZZ, answer, startAt);
-            } else {
-                startAt = checkAnswer(answer, answer, startAt);
+
+            if (!answer.equals(getExpectedAnswer(startAt))) {
+                System.out.println("Ошибка. Начинай снова.");
+                startAt = 0;
             }
+
             startAt++;
         }
     }
 
-    public static int checkAnswer(String text, String answer, int startAt) {
-        int result = startAt;
-        Optional<String> answerExists = Optional.ofNullable(answer);
-
-        if (answerExists.isEmpty() || !text.equals(answerExists.get())) {
-            System.out.println("Ошибка. Начинай снова.");
-            result = 0;
+    public static String getExpectedAnswer(int number) {
+        String result;
+        if (number % THREE == 0 && number % FIVE == 0) {
+            result = FIZZ_BUZZ;
+        } else if (number % THREE == 0) {
+            result = FIZZ;
+        } else if (number % FIVE == 0) {
+            result = BUZZ;
+        } else {
+            result = String.valueOf(number);
         }
+
         return result;
     }
 }
