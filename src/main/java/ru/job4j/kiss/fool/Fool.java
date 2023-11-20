@@ -12,8 +12,8 @@ public class Fool {
 
     public static void main(String[] args) {
         System.out.println("Игра FizzBuzz.");
-        var startAt = 1;
-        var io = new Scanner(System.in);
+        int startAt = 1;
+        Scanner io = new Scanner(System.in);
 
         while (startAt < 100) {
             if (startAt % THREE == 0 || startAt % FIVE == 0) {
