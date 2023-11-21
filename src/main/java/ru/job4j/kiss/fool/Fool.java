@@ -16,11 +16,7 @@ public class Fool {
         Scanner io = new Scanner(System.in);
 
         while (startAt < 100) {
-            if (startAt % THREE == 0 || startAt % FIVE == 0) {
-                System.out.println(getExpectedAnswer(startAt));
-            } else {
-                System.out.println(startAt);
-            }
+            System.out.println(getExpectedAnswer(startAt));
 
             startAt++;
             String answer = io.nextLine();
