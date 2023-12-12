@@ -18,4 +18,8 @@ public class MemStore implements Store {
     public List<Employee> findBy(Predicate<Employee> filter) {
         return employees.stream().filter(filter).collect(Collectors.toList());
     }
+
+    public List<Employee> getAll() {
+        return employees;
+    }
 }
