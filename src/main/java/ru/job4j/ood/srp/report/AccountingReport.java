@@ -19,8 +19,7 @@ public class AccountingReport implements Report {
         this.dateTimeParser = dateTimeParser;
         this.inMemoryCurrencyConverter = inMemoryCurrencyConverter;
     }
-
-
+    
     @Override
     public String generate(Predicate<Employee> filter) {
         StringBuilder text = new StringBuilder();
