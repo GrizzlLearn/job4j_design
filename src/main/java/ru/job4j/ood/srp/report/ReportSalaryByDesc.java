@@ -25,6 +25,7 @@ public class ReportSalaryByDesc implements Report {
                     .append(em.getSalary())
                     .append(System.lineSeparator());
         }
+
         return text.toString();
     }
 }
