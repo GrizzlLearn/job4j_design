@@ -20,7 +20,7 @@ public class TableEditor implements AutoCloseable {
         initConnection();
     }
 
-    private void initConnection(){
+    private void initConnection() {
         try {
             connection = DriverManager.getConnection(
                     properties.getProperty("url"),
