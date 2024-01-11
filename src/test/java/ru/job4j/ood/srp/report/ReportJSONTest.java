@@ -2,6 +2,7 @@ package ru.job4j.ood.srp.report;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import org.json.JSONArray;
 import org.junit.jupiter.api.Test;
 import ru.job4j.ood.srp.formatter.DateTimeParser;
 import ru.job4j.ood.srp.formatter.ReportDateTimeParser;
@@ -26,48 +27,30 @@ class ReportJSONTest {
         store.add(worker1);
         store.add(worker2);
         DateTimeParser<Calendar> parser = new ReportDateTimeParser();
-        Gson lib = new GsonBuilder().create();
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        gsonBuilder.setDateFormat("yyyy-MM-dd");
+        Gson lib = gsonBuilder.create();
         Report engine = new ReportJSON(store, parser, lib);
-
         StringBuilder expect = new StringBuilder()
                 .append("[")
-                .append(System.lineSeparator())
-                .append("\t").append("{")
-                .append(System.lineSeparator())
-                .append("\t").append("\t").append("\"name\": ").append("\"").append(worker.getName()).append("\"").append(",")
-                .append(System.lineSeparator())
-                .append("\t").append("\t").append("\"hired\": ").append("\"").append(parser.parse(worker.getHired())).append("\"").append(",")
-                .append(System.lineSeparator())
-                .append("\t").append("\t").append("\"fired\": ").append("\"").append(parser.parse(worker.getFired())).append("\"").append(",")
-                .append(System.lineSeparator())
-                .append("\t").append("\t").append("\"salary\": ").append("\"").append(worker.getSalary()).append("\"")
-                .append(System.lineSeparator())
-                .append("\t").append("}").append(",")
-                .append(System.lineSeparator())
-                .append("\t").append("{")
-                .append(System.lineSeparator())
-                .append("\t").append("\t").append("\"name\": ").append(worker1.getName()).append(",")
-                .append(System.lineSeparator())
-                .append("\t").append("\t").append("\"hired\": ").append(parser.parse(worker1.getHired())).append(",")
-                .append(System.lineSeparator())
-                .append("\t").append("\t").append("\"fired\": ").append(parser.parse(worker1.getFired())).append(",")
-                .append(System.lineSeparator())
-                .append("\t").append("\t").append("\"salary\": ").append(worker1.getSalary())
-                .append(System.lineSeparator())
-                .append("\t").append("}").append(",")
-                .append(System.lineSeparator())
-                .append("\t").append("{")
-                .append(System.lineSeparator())
-                .append("\t").append("\t").append("\"name\": ").append(worker2.getName()).append(",")
-                .append(System.lineSeparator())
-                .append("\t").append("\t").append("\"hired\": ").append(parser.parse(worker2.getHired())).append(",")
-                .append(System.lineSeparator())
-                .append("\t").append("\t").append("\"fired\": ").append(parser.parse(worker2.getFired())).append(",")
-                .append(System.lineSeparator())
-                .append("\t").append("\t").append("\"salary\": ").append(worker2.getSalary())
-                .append(System.lineSeparator())
-                .append("\t").append("}")
-                .append(System.lineSeparator())
+                .append("{")
+                .append("\"name\":").append("\"").append(worker.getName()).append("\"").append(",")
+                .append("\"hired\":").append("\"").append(parser.parse(worker.getHired())).append("\"").append(",")
+                .append("\"fired\":").append("\"").append(parser.parse(worker.getFired())).append("\"").append(",")
+                .append("\"salary\":").append((int) worker.getSalary())
+                .append("}").append(",")
+                .append("{")
+                .append("\"name\":").append("\"").append(worker1.getName()).append("\"").append(",")
+                .append("\"hired\":").append("\"").append(parser.parse(worker1.getHired())).append("\"").append(",")
+                .append("\"fired\":").append("\"").append(parser.parse(worker1.getFired())).append("\"").append(",")
+                .append("\"salary\":").append((int) worker1.getSalary())
+                .append("}").append(",")
+                .append("{")
+                .append("\"name\":").append("\"").append(worker2.getName()).append("\"").append(",")
+                .append("\"hired\":").append("\"").append(parser.parse(worker2.getHired())).append("\"").append(",")
+                .append("\"fired\":").append("\"").append(parser.parse(worker2.getFired())).append("\"").append(",")
+                .append("\"salary\":").append((int) worker2.getSalary())
+                .append("}")
                 .append("]");
         assertThat(engine.generate(em -> true)).isEqualTo(expect.toString());
     }

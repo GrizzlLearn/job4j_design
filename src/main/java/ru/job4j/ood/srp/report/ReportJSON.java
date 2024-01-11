@@ -24,17 +24,11 @@ public class ReportJSON implements Report {
 
     @Override
     public String generate(Predicate<Employee> filter) {
-        JSONArray jsonArray = new JSONArray();
-        JSONObject jsonObject;
+        StringBuilder text = new StringBuilder();
+        JSONArray array = new JSONArray();
         for (Employee em : store.findBy(filter)) {
-            jsonObject = new JSONObject();
-            jsonObject.put("name", em.getName());
-            jsonObject.put("hired", dateTimeParser.parse(em.getHired()));
-            jsonObject.put("fired", dateTimeParser.parse(em.getFired()));
-            jsonObject.put("salary", em.getSalary());
-            jsonArray.put(jsonObject);
+            array.put(lib.toJson(em));
         }
-
-        return jsonArray.toString();
+        return array.toString();
     }
 }
