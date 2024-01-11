@@ -1,6 +1,9 @@
 package ru.job4j.ood.srp.report;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import ru.job4j.ood.srp.formatter.DateTimeParser;
 import ru.job4j.ood.srp.model.Employee;
 import ru.job4j.ood.srp.store.Store;
@@ -21,12 +24,17 @@ public class ReportJSON implements Report {
 
     @Override
     public String generate(Predicate<Employee> filter) {
-        StringBuilder text = new StringBuilder();
+        JSONArray jsonArray = new JSONArray();
+        JSONObject jsonObject;
         for (Employee em : store.findBy(filter)) {
-            text.append(lib.toJson(em.getName())).append(dateTimeParser.parse(em.getHired()));
+            jsonObject = new JSONObject();
+            jsonObject.put("name", em.getName());
+            jsonObject.put("hired", dateTimeParser.parse(em.getHired()));
+            jsonObject.put("fired", dateTimeParser.parse(em.getFired()));
+            jsonObject.put("salary", em.getSalary());
+            jsonArray.put(jsonObject);
         }
-/*        text.append("name").append(":").append(em.getName()).append(",")
-                .append("hired").append(":").append(dateTimeParser.parse(em.getHired())).append(",");*/
-        return lib.toJson(text);
+
+        return jsonArray.toString();
     }
 }
