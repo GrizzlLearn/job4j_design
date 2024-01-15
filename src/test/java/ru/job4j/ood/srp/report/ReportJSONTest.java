@@ -37,21 +37,21 @@ class ReportJSONTest {
                 .append("\"name\":").append("\"").append(worker.getName()).append("\"").append(",")
                 .append("\"hired\":").append("\"").append(parser.parse(worker.getHired())).append("\"").append(",")
                 .append("\"fired\":").append("\"").append(parser.parse(worker.getFired())).append("\"").append(",")
-                .append("\"salary\":").append((int) worker.getSalary())
-                .append("}").append(",")
+                .append("\"salary\":").append(worker.getSalary())
+                .append("}").append(", ")
                 .append("{")
                 .append("\"name\":").append("\"").append(worker1.getName()).append("\"").append(",")
                 .append("\"hired\":").append("\"").append(parser.parse(worker1.getHired())).append("\"").append(",")
                 .append("\"fired\":").append("\"").append(parser.parse(worker1.getFired())).append("\"").append(",")
-                .append("\"salary\":").append((int) worker1.getSalary())
-                .append("}").append(",")
+                .append("\"salary\":").append(worker1.getSalary())
+                .append("}").append(", ")
                 .append("{")
                 .append("\"name\":").append("\"").append(worker2.getName()).append("\"").append(",")
                 .append("\"hired\":").append("\"").append(parser.parse(worker2.getHired())).append("\"").append(",")
                 .append("\"fired\":").append("\"").append(parser.parse(worker2.getFired())).append("\"").append(",")
-                .append("\"salary\":").append((int) worker2.getSalary())
+                .append("\"salary\":").append(worker2.getSalary())
                 .append("}")
                 .append("]");
-        assertThat(engine.generate(em -> true)).isEqualTo(expect.toString());
+        assertThat(engine.generate(em -> true)).isEqualTo(lib.toJson(expect.toString()));
     }
 }
