@@ -28,7 +28,6 @@ class ReportJSONTest {
         store.add(worker2);
         DateTimeParser<Calendar> parser = new ReportDateTimeParser();
         GsonBuilder gsonBuilder = new GsonBuilder();
-        gsonBuilder.setDateFormat("yyyy-MM-dd");
         Gson lib = gsonBuilder.create();
         Report engine = new ReportJSON(store, parser, lib);
         StringBuilder expect = new StringBuilder()
@@ -38,13 +37,13 @@ class ReportJSONTest {
                 .append("\"hired\":").append("\"").append(parser.parse(worker.getHired())).append("\"").append(",")
                 .append("\"fired\":").append("\"").append(parser.parse(worker.getFired())).append("\"").append(",")
                 .append("\"salary\":").append(worker.getSalary())
-                .append("}").append(", ")
+                .append("}").append(",")
                 .append("{")
                 .append("\"name\":").append("\"").append(worker1.getName()).append("\"").append(",")
                 .append("\"hired\":").append("\"").append(parser.parse(worker1.getHired())).append("\"").append(",")
                 .append("\"fired\":").append("\"").append(parser.parse(worker1.getFired())).append("\"").append(",")
                 .append("\"salary\":").append(worker1.getSalary())
-                .append("}").append(", ")
+                .append("}").append(",")
                 .append("{")
                 .append("\"name\":").append("\"").append(worker2.getName()).append("\"").append(",")
                 .append("\"hired\":").append("\"").append(parser.parse(worker2.getHired())).append("\"").append(",")
@@ -52,6 +51,6 @@ class ReportJSONTest {
                 .append("\"salary\":").append(worker2.getSalary())
                 .append("}")
                 .append("]");
-        assertThat(engine.generate(em -> true)).isEqualTo(lib.toJson(expect.toString()));
+        assertThat(engine.generate(em -> true)).isEqualTo(expect.toString());
     }
 }
