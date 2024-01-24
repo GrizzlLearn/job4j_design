@@ -1,7 +1,5 @@
 package ru.job4j.ood.srp.report;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import org.junit.jupiter.api.Test;
 import ru.job4j.ood.srp.formatter.DateTimeParser;
 import ru.job4j.ood.srp.formatter.ReportDateTimeParser;
@@ -10,8 +8,7 @@ import ru.job4j.ood.srp.store.MemStore;
 
 import javax.xml.bind.JAXBException;
 import java.util.Calendar;
-
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.xmlunit.assertj3.XmlAssert.assertThat;
 
 class ReportXMLTest {
     @Test
@@ -50,6 +47,6 @@ class ReportXMLTest {
                 .append("\t").append("</employee>").append("\n")
                 .append("</employees>")
                 .append("\n");
-        assertThat(engine.generate(em -> true)).isEqualTo(expect.toString());
+        assertThat(engine.generate(em -> true)).and(expect.toString()).ignoreWhitespace().areIdentical();
     }
 }
