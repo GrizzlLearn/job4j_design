@@ -22,7 +22,7 @@ public class ExampleOCP {
     /**
      * Если при добавлении новых типов данных приходится изменять существующий код
      */
-    public static class Shape {
+/*    public static class Shape {
         public enum Type { CIRCLE, RECTANGLE }
 
         public Type type;
@@ -37,12 +37,12 @@ public class ExampleOCP {
             }
             return 0;
         }
-    }
+    }*/
 
     /**
      * Если добавление новых правил или условий приводит к изменению существующего кода
      */
-    public static class DiscountCalculator {
+    /*public static class DiscountCalculator {
         public double calculateDiscount(double amount, CustomerType customerType) {
             if (customerType == CustomerType.REGULAR) {
                 return amount * 0.1;  // скидка 10% для обычных клиентов
@@ -51,6 +51,6 @@ public class ExampleOCP {
             }
             return 0;
         }
-    }
+    }*/
 
 }
